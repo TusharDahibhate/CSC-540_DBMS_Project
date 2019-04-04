@@ -20,7 +20,7 @@ public class Patient extends HttpServlet {
 	public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/cagarwa3";
 	public static final String user = "cagarwa3";
 	public static final String password = "200234585";
-	
+
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet result = null;
@@ -34,11 +34,9 @@ public class Patient extends HttpServlet {
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		PrintWriter out = response.getWriter();
-		out.println("sdjfdhkf");
+		String option = request.getParameter("button");
 
-		String option = request.getParameter("operation");
-
-		if (option == "create") {
+		if (option == "CREATE") {
 			String name = "Tanmaya";
 			Date dob = new Date();
 			String gender = "F";
@@ -50,7 +48,7 @@ public class Patient extends HttpServlet {
 
 		}
 
-		else if (option == "update") {
+		if (option == "UPDATE") {
 			String id = request.getParameter("id");
 			String n = request.getParameter("name");
 			String d = request.getParameter("dob");
@@ -60,6 +58,19 @@ public class Patient extends HttpServlet {
 			String ph = request.getParameter("phoneNo");
 			String age = request.getParameter("age");
 			updatePatient(id, n, d, g, s, a, ph, age);
+		}
+
+		if (option == "DELETE") {
+			String id = request.getParameter("id");
+			deletePatient(id);
+		}
+
+		if (option == "VIEW") {
+			String id = request.getParameter("id");
+			viewPatientRecord(id);
+		}
+		if (option == "VIEW ALL") {
+			viewAllPatient();
 		}
 
 	}
@@ -100,8 +111,9 @@ public class Patient extends HttpServlet {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
 
-				statement.executeUpdate("INSERT INTO PATIENTS VALUES" + "(" + name + "," + dob + "," + gender + ","
-						+ SSN + "," + address + "," + phoneNo + "," + age + ")");
+				statement.executeUpdate("INSERT INTO Patients VALUES (name, dob, gender, ssn, address, phone_no, age)"
+						+ "(" + name + "," + dob + "," + gender + "," + SSN + "," + address + "," + phoneNo + "," + age
+						+ ")");
 
 				result = statement
 						.executeQuery("SELECT id, name FROM Patients WHERE name =" + name + "AND SSN = " + SSN);
@@ -121,8 +133,8 @@ public class Patient extends HttpServlet {
 		}
 	}
 
-	protected void updatePatient(String id, String name, String dob, String gender, String SSN, String address, String phoneNo,
-			String age) {
+	protected void updatePatient(String id, String name, String dob, String gender, String SSN, String address,
+			String phoneNo, String age) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
@@ -130,8 +142,8 @@ public class Patient extends HttpServlet {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
 
-				statement.executeUpdate("UPDATE PATIENTS SET VALUES" + "(" + name + "," + dob + "," + gender + ","
-						+ SSN + "," + address + "," + phoneNo + "," + age + ") WHERE ID = " + id);
+				statement.executeUpdate("UPDATE Patients SET VALUES" + "(" + name + "," + dob + "," + gender + "," + SSN
+						+ "," + address + "," + phoneNo + "," + age + ") WHERE ID = " + id);
 
 				result = statement
 						.executeQuery("SELECT id, name FROM Patients WHERE name =" + name + "AND SSN = " + SSN);
@@ -150,6 +162,78 @@ public class Patient extends HttpServlet {
 			oops.printStackTrace();
 		}
 
+	}
+
+	protected void deletePatient(String id) {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+
+				statement.executeUpdate("DELETE FROM PATIENTS WHERE ID = " + id);
+
+				result = statement.executeQuery("SELECT id, name FROM Patients WHERE id =" + id);
+
+				while (result.next()) {
+					String pname = result.getString("name");
+					float pSSN = result.getFloat("SSN");
+					System.out.println("Patient record with " + pname + "  " + pSSN + "deleted");
+				}
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+	}
+
+	protected void viewPatientRecord(String id) {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+
+				statement.executeUpdate("SELECT * FROM PATIENTS WHERE ID = " + id);
+
+				result = statement.executeQuery("SELECT id, name FROM Patients WHERE id =" + id);
+
+				// code logic to print goes here
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+	}
+
+	protected void viewAllPatient() {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+
+				statement.executeUpdate("SELECT * FROM PATIENTS");
+
+				// code logic to print to browser goes here
+
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
