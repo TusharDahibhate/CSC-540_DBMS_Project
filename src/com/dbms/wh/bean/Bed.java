@@ -48,11 +48,11 @@ public class Bed {
 		this.rate = rate;
 	}
 
-	public int getCheckin_id() {
+	public int getCheckinId() {
 		return checkinId;
 	}
 
-	public void setCheckin_id(int checkin_id) {
+	public void setCheckinId(int checkin_id) {
 		this.checkinId = checkin_id;
 	}
 	
