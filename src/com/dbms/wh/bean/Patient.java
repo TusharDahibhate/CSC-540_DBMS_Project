@@ -13,6 +13,22 @@ public class Patient {
 	private String gender;
 	private Date dob;
 	private String address;
+	
+	public Patient(int age, String name, String ssn, String phoneNo, String gender, Date dob, String address) {
+		this.age = age;
+		this.name = name;
+		this.ssn = ssn;
+		this.phoneNo = phoneNo;
+		this.gender = gender;
+		this.dob = dob;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Patient [id=" + id + ", age=" + age + ", name=" + name + ", ssn=" + ssn + ", phoneNo=" + phoneNo
+				+ ", gender=" + gender + ", dob=" + dob + ", address=" + address + "]";
+	}
 
 	public int getId() {
 		return id;
@@ -77,10 +93,4 @@ public class Patient {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

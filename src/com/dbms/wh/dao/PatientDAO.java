@@ -18,14 +18,15 @@ public class PatientDAO {
 	public PatientDAO() {
 		
 	}
-	protected void createPatient(Patient patient) {
+	public void createPatient(Patient patient) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("INSERT INTO Patients VALUES (name, dob, gender, ssn, address, phone_no, age)"
-						+ "(" + patient.getName() + "," + patient.getDob() + "," + patient.getGender() + "," + patient.getSsn() + "," + patient.getAddress() + "," + patient.getPhoneNo() + "," + patient.getAge()
+				java.sql.Date sqlDate = new java.sql.Date(patient.getDob().getTime());
+				statement.executeUpdate("INSERT INTO patients (name, dob, gender, ssn, address, phone_no, age) VALUES"
+						+ "('" + patient.getName() + "','" + sqlDate + "','" + patient.getGender() + "','" + patient.getSsn() + "','" + patient.getAddress() + "','" + patient.getPhoneNo() + "'," + patient.getAge()
 						+ ")");
 				System.out.println("New Patient added successfully!");
 			} finally {
