@@ -2,26 +2,26 @@ package com.dbms.wh.bean;
 
 public class Bed {
 	protected int id;
-	protected int ward_id;
+	protected int wardId;
 	protected int rate;
-	protected int checkin_id;
+	protected int checkinId;
 
 	public Bed() {
 	}
 
 	public Bed(int ward_id, int rate, int checkin_id) {
 		super();
-		this.ward_id = ward_id;
+		this.wardId = ward_id;
 		this.rate = rate;
-		this.checkin_id = checkin_id;
+		this.checkinId = checkin_id;
 	}
 
 	public Bed(int id, int ward_id, int rate, int checkin_id) {
 		super();
 		this.id = id;
-		this.ward_id = ward_id;
+		this.wardId = ward_id;
 		this.rate = rate;
-		this.checkin_id = checkin_id;
+		this.checkinId = checkin_id;
 	}
 
 	public int getId() {
@@ -32,12 +32,12 @@ public class Bed {
 		this.id = id;
 	}
 
-	public int getWard_id() {
-		return ward_id;
+	public int getWardId() {
+		return wardId;
 	}
 
-	public void setWard_id(int ward_id) {
-		this.ward_id = ward_id;
+	public void setWardId(int ward_id) {
+		this.wardId = ward_id;
 	}
 
 	public int getRate() {
@@ -49,11 +49,11 @@ public class Bed {
 	}
 
 	public int getCheckin_id() {
-		return checkin_id;
+		return checkinId;
 	}
 
 	public void setCheckin_id(int checkin_id) {
-		this.checkin_id = checkin_id;
+		this.checkinId = checkin_id;
 	}
 	
 	
