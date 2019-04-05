@@ -40,7 +40,7 @@
 				<tr>
 					<th> Ward id</th>
 					<td><input type="number" name="ward_id" size="45"
-					value="<c:out value='${bed.ward_id}' />" /></td>
+					value="<c:out value='${bed.wardId}' />" /></td>
 				</tr>
 			</c:if>					
 			
@@ -52,7 +52,7 @@
 			<tr>
 				<th>Check in Id:</th>
 				<td><input type="number" name="checkin_id" size="15"
-					value="<c:out value='${bed.checkin_id}' />" /></td>
+					value="<c:out value='${bed.checkinId}' />" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

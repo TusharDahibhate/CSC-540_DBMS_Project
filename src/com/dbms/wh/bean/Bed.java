@@ -36,8 +36,8 @@ public class Bed {
 		return wardId;
 	}
 
-	public void setWardId(int ward_id) {
-		this.wardId = ward_id;
+	public void setWardId(int wardId) {
+		this.wardId = wardId;
 	}
 
 	public int getRate() {
@@ -52,10 +52,8 @@ public class Bed {
 		return checkinId;
 	}
 
-	public void setCheckinId(int checkin_id) {
-		this.checkinId = checkin_id;
+	public void setCheckinId(int checkinId) {
+		this.checkinId = checkinId;
 	}
-	
-	
 
-	}
+}

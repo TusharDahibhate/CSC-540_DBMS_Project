@@ -45,9 +45,9 @@ public class BedDAO {
 
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BEDS_SQL)) {
-			preparedStatement.setInt(1, bed.getWard_id());
+			preparedStatement.setInt(1, bed.getWardId());
 			preparedStatement.setInt(2, bed.getRate());
-			preparedStatement.setInt(3, bed.getCheckin_id());
+			preparedStatement.setInt(3, bed.getCheckinId());
 
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
@@ -116,7 +116,7 @@ public class BedDAO {
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(UPDATE_BEDS_SQL);) {
 			statement.setInt(1, bed.getRate());
-			statement.setInt(2, bed.getCheckin_id());
+			statement.setInt(2, bed.getCheckinId());
 			statement.setInt(3, bed.getId());
 
 			rowUpdated = statement.executeUpdate() > 0;

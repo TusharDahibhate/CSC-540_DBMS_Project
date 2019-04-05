@@ -29,9 +29,9 @@
 			<c:forEach var="bed" items="${listBed}">
 				<tr>
 					<td><c:out value="${bed.id}" /></td>
-					<td><c:out value="${bed.ward_id}" /></td>
+					<td><c:out value="${bed.wardId}" /></td>
 					<td><c:out value="${bed.rate}" /></td>
-					<td><c:out value="${bed.checkin_id}" /></td>
+					<td><c:out value="${bed.checkinId}" /></td>
 					<td><a href="edit?id=<c:out value='${bed.id}' />">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="delete?id=<c:out value='${bed.id}' />">Delete</a></td>
