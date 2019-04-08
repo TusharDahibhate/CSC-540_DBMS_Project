@@ -7,6 +7,14 @@ public class Test {
 	private Staff staff;
 	private int staff_id;
 
+	public int getStaff_id() {
+		return staff_id;
+	}
+
+	public void setStaff_id(int staff_id) {
+		this.staff_id = staff_id;
+	}
+
 	public Test(int id, String name, int price, int staff_id) {
 		super();
 		this.id = id;
@@ -14,13 +22,12 @@ public class Test {
 		this.price = price;
 		this.staff_id = staff_id;
 	}
-	
+
 	public Test(String name, int price, int staff_id) {
 		this.name = name;
 		this.price = price;
 		this.staff_id = staff_id;
 	}
-
 
 	@Override
 	public String toString() {
@@ -50,11 +57,11 @@ public class Test {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-	
+
 	public Staff getStaff() {
 		return staff;
 	}
