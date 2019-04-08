@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dbms.wh.bean.Bed;
 import com.dbms.wh.dao.BedDAO;
 
-
 @WebServlet("/BedServlet")
-
 public class BedServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -33,10 +31,11 @@ public class BedServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getServletPath();
-
+		
 		String option = request.getParameter("operation");
-		if(option == null) {
+		
+		System.out.println(option);
+		if (option == null) {
 			option = "list";
 		}
 
@@ -57,7 +56,7 @@ public class BedServlet extends HttpServlet {
 			case "UPDATE":
 				updateUser(request, response);
 				break;
-			case "/list":
+			case "list":
 				listUser(request, response);
 				break;
 			}
