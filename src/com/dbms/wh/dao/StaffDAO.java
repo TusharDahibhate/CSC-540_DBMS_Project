@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Date;
 
 import com.dbms.wh.bean.Patient;
+import com.dbms.wh.bean.Staff;
 
-public class PatientDAO {
+public class StaffDAO {
 	public static final String jdbcURL = "jdbc:mariadb://classdb2.csc.ncsu.edu:3306/cagarwa3";
 	public static final String user = "cagarwa3";
 	public static final String password = "200234585";
@@ -16,22 +16,23 @@ public class PatientDAO {
 	Statement statement = null;
 	ResultSet result = null;
 
-	public PatientDAO() {
+	public StaffDAO() {
 
 	}
 
-	public void createPatient(Patient patient) {
+	public void createStaff(Staff staff) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				java.sql.Date sqlDate = new java.sql.Date(patient.getDob().getTime());
-				statement.executeUpdate("INSERT INTO patients (name, dob, gender, ssn, address, phone_no, age) VALUES"
-						+ "('" + patient.getName() + "','" + sqlDate + "','" + patient.getGender() + "','"
-						+ patient.getSsn() + "','" + patient.getAddress() + "','" + patient.getPhoneNo() + "',"
-						+ patient.getAge() + ")");
-				System.out.println("New Patient added successfully!");
+				statement.executeUpdate(
+						"INSERT INTO staff(name, age, gender, job_title, professional_title, phone_no, address, department) VALUES ('"
+								+ staff.getName() + "', " + staff.getAge() + ", '" + staff.getGender() + "', '"
+								+ staff.getJobTitle() + "', '" + staff.getProfessionalTitle() + "', "
+								+ staff.getPhoneNo() + ", '" + staff.getAddress() + "', '" + staff.getDepartment()
+								+ "');");
+				System.out.println("New Staff added successfully!");
 			} finally {
 				close(result);
 				close(statement);
@@ -42,18 +43,18 @@ public class PatientDAO {
 		}
 	}
 
-	public void updatePatient(Patient patient) {
+	public void updatePatient(Staff st) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				java.sql.Date sqlDate = new java.sql.Date(patient.getDob().getTime());
-				statement.executeUpdate("UPDATE patients SET name = '" + patient.getName() + "', dob = '" + sqlDate
-						+ "', gender = '" + patient.getGender() + "', ssn = '" + patient.getSsn() + "', address = '"
-						+ patient.getAddress() + "', phone_no = '" + patient.getPhoneNo() + "', age = "
-						+ patient.getAge() + "  WHERE id = " + patient.getId() + ";");
-				System.out.println("Patient updated successfully!");
+				statement.executeUpdate("UPDATE staff SET name = '" + st.getName() + "', age = " + st.getAge()
+						+ ", gender = '" + st.getGender() + "', job_title = '" + st.getJobTitle()
+						+ "', professional_title = '" + st.getProfessionalTitle() + "', phone_no = " + st.getPhoneNo()
+						+ ", address = '" + st.getAddress() + "', department='" + st.getDepartment() + "'  WHERE id = "
+						+ st.getId() + ";");
+				System.out.println("Staff updated successfully!");
 			} finally {
 				close(result);
 				close(statement);
@@ -64,14 +65,14 @@ public class PatientDAO {
 		}
 	}
 
-	public void deletePatient(int patient_id) {
+	public void deleteStaff(int staff_id) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("DELETE from patients where id = " + patient_id + ";");
-				System.out.println("Patient deleted successfully!");
+				statement.executeUpdate("DELETE from staff where id = " + staff_id + ";");
+				System.out.println("Staff deleted successfully!");
 			} finally {
 				close(result);
 				close(statement);

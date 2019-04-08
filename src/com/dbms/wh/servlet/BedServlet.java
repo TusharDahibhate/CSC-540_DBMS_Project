@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.dbms.wh.bean.Bed;
 import com.dbms.wh.dao.BedDAO;
 
+
 @WebServlet("/BedServlet")
+
 public class BedServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -55,7 +57,7 @@ public class BedServlet extends HttpServlet {
 			case "UPDATE":
 				updateUser(request, response);
 				break;
-			default:
+			case "/list":
 				listUser(request, response);
 				break;
 			}
