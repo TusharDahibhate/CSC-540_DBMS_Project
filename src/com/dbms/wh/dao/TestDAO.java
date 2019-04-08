@@ -44,8 +44,8 @@ public class TestDAO {
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("UPDATE tests (name, price, staff_id) SET VALUES" + "('" + test.getName()
-						+ "','" + test.getPrice() + "','" + test.getStaff() + ")");
+				statement.executeUpdate("UPDATE tests SET name = '" + test.getName() + "', price = '" + test.getPrice()
+						+ "', staff_id = '" + test.getStaff() + ";");
 				System.out.println("New Test updated successfully!");
 			} finally {
 				close(result);

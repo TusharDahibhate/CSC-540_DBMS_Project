@@ -4,15 +4,23 @@ public class Test {
 	private int id;
 	private String name;
 	private int price;
-	Staff staff;
+	private Staff staff;
+	private int staff_id;
 
-	public Test(int id, String name, int price, Staff staff) {
+	public Test(int id, String name, int price, int staff_id) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
-		this.staff = staff;
+		this.staff_id = staff_id;
 	}
+	
+	public Test(String name, int price, int staff_id) {
+		this.name = name;
+		this.price = price;
+		this.staff_id = staff_id;
+	}
+
 
 	@Override
 	public String toString() {
