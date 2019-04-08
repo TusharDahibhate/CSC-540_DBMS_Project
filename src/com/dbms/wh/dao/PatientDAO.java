@@ -50,7 +50,25 @@ public class PatientDAO {
 				statement = connection.createStatement();
 				java.sql.Date sqlDate = new java.sql.Date(patient.getDob().getTime());
 				statement.executeUpdate("UPDATE patients SET name = '"+patient.getName()+"', dob = '"+sqlDate+"', gender = '"+patient.getGender()+"', ssn = '"+patient.getSsn()+"', address = '"+patient.getAddress()+"', phone_no = '"+patient.getPhoneNo()+"', age = "+patient.getAge()+"  WHERE id = "+patient.getId()+";");
-				System.out.println("New Patient added successfully!");
+				System.out.println("Patient updated successfully!");
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+	}
+	
+	public void deletePatient(int patient_id) {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+				statement.executeUpdate("DELETE from patients where id = "+patient_id+";");
+				System.out.println("Patient deleted successfully!");
 			} finally {
 				close(result);
 				close(statement);
