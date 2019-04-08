@@ -33,10 +33,10 @@ public class Staff {
 	public int getId() {
 		return id;
 	}
-//
-//	public void setId(int id) {
-//		this.id = id;
-//	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Integer getAge() {
 		return age;
@@ -66,7 +66,7 @@ public class Staff {
 		return phone_no;
 	}
 
-	public void setPhone_no(Integer phone_no) {
+	public void setPhoneNo(Integer phone_no) {
 		this.phone_no = phone_no;
 	}
 
