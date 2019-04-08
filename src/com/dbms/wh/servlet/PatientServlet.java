@@ -24,16 +24,24 @@ public class PatientServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		PatientDAO patientdao = new PatientDAO();
+		PrintWriter out = response.getWriter();
 		//String id = request.getParameter("id");
 		try {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date parsed = format.parse(request.getParameter("dob"));
-			Patient patient = new Patient(Integer.parseInt(request.getParameter("age")), request.getParameter("name"), request.getParameter("ssn"), request.getParameter("phoneNo"), request.getParameter("gender"), parsed, request.getParameter("address"));
-			PrintWriter out = response.getWriter();
-			patientdao.createPatient(patient);
-			//out.println(patient.toString());
+			if(request.getParameter("operation").equals("create")) {
+				// Converting date from Java to SQL
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date parsed = format.parse(request.getParameter("dob"));
+				Patient patient = new Patient(Integer.parseInt(request.getParameter("age")), request.getParameter("name"), request.getParameter("ssn"), request.getParameter("phoneNo"), request.getParameter("gender"), parsed, request.getParameter("address"));
+				patientdao.createPatient(patient);
+			}
+			else if(request.getParameter("operation").equals("update")) {
+				
+			}
+			else if(request.getParameter("operation").equals("delete")) {
+				
+			}
 			
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
