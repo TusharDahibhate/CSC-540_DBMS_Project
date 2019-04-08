@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Staff</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+</head>
+<body>
+	<form action="StaffServlet" method="get" enctype="multipart/form-data">
+		<div class="grid-container">
+			<h2 class="text-center">Staff Information</h2>
+			<div class="grid-x grid-padding-x">
+				<label>Name</label>
+				<input class="form-control" type="text" name="name" required/>
+				<label>Age</label>
+				<input class="form-control" type="number" name="age" />
+				<label>Gender</label>
+				<select name="gender">
+				  <option value="M">Male</option>
+				  <option value="F">Female</option>
+				</select>
+				<label>Job Title</label>
+				<select name="job_title" required>
+				  <option value="doctor">Doctor</option>
+				  <option value="nurse">Nurse</option>
+				  <option value="operator">Operator</option>
+				</select>
+				<label>Professional Title</label>
+				<input class="form-control" type="text" name="professional_title" />
+				<label>Phone</label>
+				<input class="form-control" type="tel" name="phone_no" />
+				<label>Address</label>
+				<input class="form-control" type="text" name="address" />
+				<label>Department</label>
+				<input class="form-control" type="text" name="department" />
+			</div>
+			<button type="submit" value="Fire!" class="button">Submit</button>
+		</div>
+	</form>
+</body>
+</html>
