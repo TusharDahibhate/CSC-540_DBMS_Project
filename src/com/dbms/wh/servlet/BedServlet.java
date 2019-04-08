@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dbms.wh.bean.Bed;
 import com.dbms.wh.dao.BedDAO;
 
-@WebServlet("/")
+@WebServlet("/BedServlet")
 public class BedServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -33,21 +33,26 @@ public class BedServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getServletPath();
 
+		String option = request.getParameter("operation");
+		if(option == null) {
+			option = "list";
+		}
+
 		try {
-			switch (action) {
-			case "/new":
+			switch (option) {
+			case "ADD":
 				showNewForm(request, response);
 				break;
-			case "/insert":
+			case "INSERT":
 				insertUser(request, response);
 				break;
-			case "/delete":
+			case "DELETE":
 				deleteUser(request, response);
 				break;
-			case "/edit":
+			case "EDIT":
 				showEditForm(request, response);
 				break;
-			case "/update":
+			case "UPDATE":
 				updateUser(request, response);
 				break;
 			default:
@@ -69,7 +74,7 @@ public class BedServlet extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("bed-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/bed-form.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -77,7 +82,7 @@ public class BedServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Bed existingBed = bedDAO.selectBed(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("bed-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/bed-form.jsp");
 		request.setAttribute("bed", existingBed);
 		dispatcher.forward(request, response);
 	}
@@ -88,7 +93,7 @@ public class BedServlet extends HttpServlet {
 		int checkin_id = Integer.parseInt(request.getParameter("checkin_id"));
 		Bed newBed = new Bed(ward_id, rate, checkin_id);
 		bedDAO.insertBed(newBed);
-		response.sendRedirect("list");
+		response.sendRedirect("DBMS_Project/beds");
 	}
 
 	private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
@@ -98,14 +103,13 @@ public class BedServlet extends HttpServlet {
 		int checkin_id = Integer.parseInt(request.getParameter("checkin_id"));
 		Bed newBed = new Bed(ward_id, rate, checkin_id);
 		bedDAO.insertBed(newBed);
-		response.sendRedirect("list");
+		response.sendRedirect("DBMS_Project/beds");
 	}
 
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		bedDAO.deleteUser(id);
-		response.sendRedirect("list");
-
+		response.sendRedirect("DBMS_Project/beds");
 	}
 
 }

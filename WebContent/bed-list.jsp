@@ -9,8 +9,16 @@
 	<center>
 		<h1>User Management</h1>
 		<h2>
-			<a href="new">Add New Bed</a> &nbsp;&nbsp;&nbsp; 
-			<a href="list">List All Beds</a>
+			<form action="BedServlet" method="get" enctype="multipart/form-data">
+				<button type="submit" name="button" value="ADD">ADD</button>
+				<input type="hidden" name="operation" value="ADD" />
+			</form>
+
+			<form action="BedServlet" method="get" enctype="multipart/form-data">
+				<button type="submit" name="button" value="LIST">LIST</button>
+				<input type="hidden" name="operation" value="LIST" />
+			</form>
+
 		</h2>
 	</center>
 
@@ -32,9 +40,22 @@
 					<td><c:out value="${bed.wardId}" /></td>
 					<td><c:out value="${bed.rate}" /></td>
 					<td><c:out value="${bed.checkinId}" /></td>
-					<td><a href="edit?id=<c:out value='${bed.id}' />">Edit</a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="delete?id=<c:out value='${bed.id}' />">Delete</a></td>
+					<td>
+						<form action="BedServlet" method="get"
+							enctype="multipart/form-data">
+							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<input type="hidden" name="operation" value="EDIT" /> <input
+								type="hidden" name="id" value='${bed.id}' />
+						</form>
+					</td>
+					<td>
+						<form action="BedServlet" method="get"
+							enctype="multipart/form-data">
+							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<input type="hidden" name="operation" value="DELETE" /> <input
+								type="hidden" name="id" value='${bed.id}' />
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

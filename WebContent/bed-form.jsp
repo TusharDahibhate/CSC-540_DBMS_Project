@@ -9,7 +9,7 @@
 	<center>
 		<h1>Bed Management</h1>
 		<h2>
-			<a href="new">Add New Bed</a> &nbsp;&nbsp;&nbsp; <a href="list">List
+			<a href="/beds/new">Add New Bed</a> &nbsp;&nbsp;&nbsp; <a href="/beds">List
 				All Beds</a>
 
 		</h2>
