@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.dbms.wh.bean.Patient;
 
@@ -81,7 +83,66 @@ public class PatientDAO {
 			oops.printStackTrace();
 		}
 	}
+	
+	public Patient selectPatient(int id) {
+		Patient patient = null;
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("SELECT id, ssn, name, dob, gender, age, phone_no, address FROM patients WHERE id = "+id+"");
+				while (rs.next()) {
+					int age = rs.getInt("age");
+					String ssn = rs.getString("ssn");
+					String name = rs.getString("name");
+					Date dob = rs.getDate("dob");
+					String gender = rs.getString("gender");
+					String phoneNo = rs.getString("phone_no");
+					String address = rs.getString("address");
+					patient = new Patient(id, age, name, ssn, phoneNo, gender, dob, address);
+				}
+				
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+		return patient;
+	}
+	
+	public List<Patient> selectAllUsers() {
 
+		List<Patient> patients = new ArrayList<>();
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			connection = DriverManager.getConnection(jdbcURL, user, password);
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id, ssn, name, dob, gender, age, phone_no, address FROM patients");
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int age = rs.getInt("age");
+				String ssn = rs.getString("ssn");
+				String name = rs.getString("name");
+				Date dob = rs.getDate("dob");
+				String gender = rs.getString("gender");
+				String phoneNo = rs.getString("phone_no");
+				String address = rs.getString("address");
+				patients.add(new Patient(id, age, name, ssn, phoneNo, gender, dob, address));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("From Patient DAO select Users");
+		}
+		return patients;
+	}
+	
+	
 	static void close(Connection connection) {
 		if (connection != null) {
 			try {
