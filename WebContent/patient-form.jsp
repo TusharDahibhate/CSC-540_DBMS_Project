@@ -17,7 +17,8 @@
 	</center>
 	<div align="center">
 		<c:if test="${patient != null}">
-			<form action="update" method="post">
+			<form action="PatientServlet" method="get">
+			<input type="hidden" name="operation" value="modify" />
 		</c:if>
 		<c:if test="${patient == null}">
 			<form action="PatientServlet" method="get">
@@ -59,27 +60,27 @@
 			<tr>
 				<th>SSN:</th>
 				<td><input type="number" name="ssn" size="15"
-					value="<c:out value='${patient.name}' />" /></td>
+					value="<c:out value='${patient.ssn}' />" /></td>
 			</tr>
 			<tr>
 				<th>Phone No:</th>
 				<td><input type="text" name="phoneNo" size="15"
-					value="<c:out value='${patient.name}' />" /></td>
+					value="<c:out value='${patient.phoneNo}' />" /></td>
 			</tr>
 			<tr>
 				<th>Gender:</th>
 				<td><input type="text" name="gender" size="15"
-					value="<c:out value='${patient.name}' />" /></td>
+					value="<c:out value='${patient.gender}' />" /></td>
 			</tr>
 			<tr>
 				<th>Dob:</th>
 				<td><input type="date" name="dob" size="15"
-					value="<c:out value='${patient.name}' />" /></td>
+					value="<c:out value='${patient.dob}' />" /></td>
 			</tr>
 			<tr>
 				<th>Address:</th>
 				<td><input type="text" name="address" size="15"
-					value="<c:out value='${patient.name}' />" /></td>
+					value="<c:out value='${patient.address}' />" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

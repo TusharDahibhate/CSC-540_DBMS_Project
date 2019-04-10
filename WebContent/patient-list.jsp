@@ -10,23 +10,21 @@
 	<center>
 		<h1>Patient Management</h1>
 		<h2>
-			<form action="PatientServlet" method="get" enctype="multipart/form-data">
+			<form action="patient-form.jsp" method="get" enctype="multipart/form-data">
 				<button type="submit" name="button" value="create">ADD</button>
-				<input type="hidden" name="operation" value="create" />
 			</form>
 
 			<form action="PatientServlet" method="get" enctype="multipart/form-data">
 				<button type="submit" name="button" value="list">LIST</button>
 				<input type="hidden" name="operation" value="list" />
 			</form>
-
 		</h2>
 	</center>
 
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>List of Beds</h2>
+				<h2>List of Patients</h2>
 			</caption>
 			<tr>
 				<th>ID</th>

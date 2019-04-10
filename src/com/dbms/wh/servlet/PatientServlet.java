@@ -51,6 +51,16 @@ public class PatientServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 				
 			}
+			else if (operation.equals("modify")) {
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date parsed = format.parse(request.getParameter("dob"));
+				Patient patient = new Patient(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("age")), request.getParameter("name"), request.getParameter("ssn"), request.getParameter("phoneNo"), request.getParameter("gender"), parsed, request.getParameter("address"));
+				patientdao.updatePatient(patient);
+				List<Patient> patients = patientdao.selectAllUsers();
+				request.setAttribute("patients", patients);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
+				dispatcher.forward(request, response);
+			}
 			else if(operation.equals("update")) {
 				int id = Integer.parseInt(request.getParameter("id"));
 				Patient existingPatient = patientdao.selectPatient(id);
