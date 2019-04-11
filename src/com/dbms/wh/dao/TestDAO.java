@@ -75,13 +75,13 @@ public class TestDAO {
 		}
 	}
 
-	public void deleteTest(Test test) {
+	public void deleteTest(int test_id) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("DELETE from tests WHERE id = " + "('" + test.getId() + ")");
+				statement.executeUpdate("DELETE from tests WHERE id = " + test_id + ";");
 				System.out.println("New Test deleted successfully!");
 			} finally {
 				close(result);

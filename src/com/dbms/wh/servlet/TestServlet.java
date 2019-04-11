@@ -86,7 +86,7 @@ public class TestServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			Test existingTest = testDAO.selectTest(id);
-			System.out.println("servlet id: "+ existingTest.getId());
+			System.out.println("servlet id: " + existingTest.getId());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("test-form.jsp");
 			request.setAttribute("test", existingTest);
 			dispatcher.forward(request, response);
@@ -116,11 +116,8 @@ public class TestServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		try {
-			int staff_id = Integer.parseInt(request.getParameter("staff_id"));
-			int price = Integer.parseInt(request.getParameter("price"));
-			String name = request.getParameter("name");
-			Test test = new Test(name, price, staff_id);
-			testDAO.deleteTest(test);
+			int id = Integer.parseInt(request.getParameter("id"));
+			testDAO.deleteTest(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
