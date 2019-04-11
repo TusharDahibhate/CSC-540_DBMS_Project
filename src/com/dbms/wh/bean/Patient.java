@@ -14,6 +14,18 @@ public class Patient {
 	private Date dob;
 	private String address;
 	
+	public Patient(int id, int age, String name, String ssn, String phoneNo, String gender, Date dob, String address) {
+		super();
+		this.id = id;
+		this.age = age;
+		this.name = name;
+		this.ssn = ssn;
+		this.phoneNo = phoneNo;
+		this.gender = gender;
+		this.dob = dob;
+		this.address = address;
+	}
+
 	public Patient(int age, String name, String ssn, String phoneNo, String gender, Date dob, String address) {
 		this.age = age;
 		this.name = name;
