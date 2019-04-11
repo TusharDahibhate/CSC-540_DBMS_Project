@@ -16,11 +16,12 @@ public class BedDAO {
 	private String jdbcUsername = "cagarwa3";
 	private String jdbcPassword = "200234585";
 
-	private static final String INSERT_BEDS_SQL = "INSERT INTO beds(ward_id, rate, checkin_id) VALUES " + " (?, ?, ?);";
-	private static final String SELECT_BED_BY_ID = "SELECT id, ward_id, rate, checkin_id FROM beds where id =?";
+	private static final String INSERT_BEDS_SQL = "INSERT INTO beds(id, ward_id, rate) VALUES " + " (?, ?, ?);";
+	private static final String SELECT_BED_BY_ID = "SELECT id, ward_id, rate, checkin_id FROM beds where id =? AND ward_id = ?";
 	private static final String SELECT_ALL_BEDS = "SELECT * FROM beds";
-	private static final String DELETE_BEDS_SQL = "DELETE FROM beds WHERE id = ?;";
+	private static final String DELETE_BEDS_SQL = "DELETE FROM beds WHERE id = ? AND ward_id = ?;";
 	private static final String UPDATE_BEDS_SQL = "UPDATE beds SET rate = ?,checkin_id= ? WHERE id = ?;";
+	private static final String UPDATE_BED_RATE_SQL = "UPDATE beds SET rate = ? WHERE id = ?;";
 
 	public BedDAO() {
 	}
@@ -43,11 +44,22 @@ public class BedDAO {
 	public void insertBed(Bed bed) throws SQLException {
 		System.out.println(INSERT_BEDS_SQL);
 
-		try (Connection connection = getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BEDS_SQL)) {
-			preparedStatement.setInt(1, bed.getWardId());
-			preparedStatement.setInt(2, bed.getRate());
-			preparedStatement.setInt(3, bed.getCheckinId());
+		try {
+			Connection connection = getConnection();
+
+			PreparedStatement p = connection
+					.prepareStatement("Select id from beds where ward_id = " + bed.getWardId() + ";");
+			ResultSet rs = p.executeQuery();
+			int bed_id = 0;
+
+			while (rs.next()) {
+				bed_id = rs.getInt("id");
+			}
+
+			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BEDS_SQL);
+			preparedStatement.setInt(1, bed_id + 1);
+			preparedStatement.setInt(2, bed.getWardId());
+			preparedStatement.setInt(3, bed.getRate());
 
 			System.out.println(preparedStatement);
 			preparedStatement.executeUpdate();
@@ -56,13 +68,14 @@ public class BedDAO {
 		}
 	}
 
-	public Bed selectBed(int id) {
+	public Bed selectBed(int id, int w_id) {
 		Bed bed = null;
 
 		try (Connection connection = getConnection();
 
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BED_BY_ID);) {
 			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(2, w_id);
 			System.out.println(preparedStatement);
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -78,7 +91,7 @@ public class BedDAO {
 		return bed;
 	}
 
-	public List<Bed> selectAllUsers() {
+	public List<Bed> selectAllBeds() {
 
 		List<Bed> beds = new ArrayList<>();
 
@@ -101,25 +114,37 @@ public class BedDAO {
 		return beds;
 	}
 
-	public boolean deleteUser(int id) throws SQLException {
+	public boolean deleteBed(int id, int w_id) throws SQLException {
 		boolean rowDeleted;
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(DELETE_BEDS_SQL);) {
 			statement.setInt(1, id);
+			statement.setInt(2, w_id);
 			rowDeleted = statement.executeUpdate() > 0;
 		}
 		return rowDeleted;
 	}
 
-	public boolean updateUser(Bed bed) throws SQLException {
-		boolean rowUpdated;
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_BEDS_SQL);) {
-			statement.setInt(1, bed.getRate());
-			statement.setInt(2, bed.getCheckinId());
-			statement.setInt(3, bed.getId());
+	public boolean updateBed(Bed bed) throws SQLException {
+		boolean rowUpdated = false;
+		try {
+			Connection connection = getConnection();
+			PreparedStatement statement = null;
+
+			if (bed.getCheckinId() == 0) {
+				statement = connection.prepareStatement(UPDATE_BED_RATE_SQL);
+				statement.setInt(1, bed.getRate());
+				statement.setInt(2, bed.getId());
+			} else {
+				statement = connection.prepareStatement(UPDATE_BEDS_SQL);
+				statement.setInt(1, bed.getRate());
+				statement.setInt(2, bed.getCheckinId());
+				statement.setInt(3, bed.getId());
+			}
 
 			rowUpdated = statement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			printSQLException(e);
 		}
 		return rowUpdated;
 	}

@@ -9,6 +9,12 @@ public class Bed {
 	public Bed() {
 	}
 
+	public Bed(int ward_id, int rate) {
+		super();
+		this.wardId = ward_id;
+		this.rate = rate;		
+	}
+	
 	public Bed(int ward_id, int rate, int checkin_id) {
 		super();
 		this.wardId = ward_id;
