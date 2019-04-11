@@ -126,6 +126,7 @@ public class StaffDAO {
 			preparedStatement.setInt(6, staff.getPhoneno());
 			preparedStatement.setString(7, staff.getAddress());
 			preparedStatement.setString(8, staff.getDepartment());
+			preparedStatement.setInt(9, staff.getId());
 			rowUpdated = preparedStatement.executeUpdate() > 0;
 		}
 		return rowUpdated;

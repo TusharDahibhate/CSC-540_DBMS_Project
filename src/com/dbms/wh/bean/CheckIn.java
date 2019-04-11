@@ -6,22 +6,22 @@ public class CheckIn {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private int patient_id;
-	private int staff_id;
-	private Date start_date;
-	private Date end_date;
+	private int patientid;
+	private int staffid;
+	private Date startdate;
+	private Date enddate;
 
 	public CheckIn(int patient_id, int staff_id, Date start_date, Date end_date) {
-		this.patient_id = patient_id;
-		this.staff_id = staff_id;
-		this.start_date = start_date;
-		this.end_date = end_date;
+		this.patientid = patient_id;
+		this.staffid = staff_id;
+		this.startdate = start_date;
+		this.enddate = end_date;
 	}
 
 	@Override
 	public String toString() {
-		return "Checkin [id=" + id + ", patient_id=" + patient_id + ", staff_id=" + staff_id + ", start_date="
-				+ start_date + ", end_date=" + end_date + "]";
+		return "Checkin [id=" + id + ", patient_id=" + patientid + ", staff_id=" + staffid + ", start_date="
+				+ startdate + ", end_date=" + enddate + "]";
 	}
 
 	public int getId() {
@@ -32,35 +32,35 @@ public class CheckIn {
 		this.id = id;
 	}
 
-	public int getPatientId() {
-		return patient_id;
+	public int getPatientid() {
+		return patientid;
 	}
 
-	public void setPatientId(int patient_id) {
-		this.patient_id = patient_id;
+	public void setPatientid(int patient_id) {
+		this.patientid = patient_id;
 	}
 
-	public int getStaffId() {
-		return staff_id;
+	public int getStaffid() {
+		return staffid;
 	}
 
-	public void setStaffId(int staff_id) {
-		this.staff_id = staff_id;
+	public void setStaffid(int staff_id) {
+		this.staffid = staff_id;
 	}
 
-	public Date getStartDate() {
-		return start_date;
+	public Date getStartdate() {
+		return startdate;
 	}
 
-	public void setStartDate(Date start_date) {
-		this.start_date = start_date;
+	public void setStartdate(Date start_date) {
+		this.startdate = start_date;
 	}
 
-	public Date getEndDate() {
-		return end_date;
+	public Date getEnddate() {
+		return enddate;
 	}
 
-	public void setEndDate(Date end_date) {
-		this.end_date = end_date;
+	public void setEnddate(Date end_date) {
+		this.enddate = end_date;
 	}
 }
