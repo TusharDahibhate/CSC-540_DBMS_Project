@@ -19,7 +19,6 @@ public class TestDAO {
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet result = null;
-	private static final String SELECT_TEST_BY_ID = "SELECT id, name, price, staff_id FROM tests where id =?";
 
 	public TestDAO() {
 
@@ -63,8 +62,8 @@ public class TestDAO {
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("UPDATE tests SET name = '" + test.getName() + "', price = '" + test.getPrice()
-						+ "', staff_id = '" + test.getStaff() + ";");
+				statement.executeUpdate("UPDATE tests SET name = '" + test.getName() + "', price = " + test.getPrice()
+						+ ", staff_id = " + test.getStaff_id() + " WHERE id = " + test.getId());
 				System.out.println("New Test updated successfully!");
 			} finally {
 				close(result);
@@ -76,13 +75,13 @@ public class TestDAO {
 		}
 	}
 
-	public void deleteTest(Test test) {
+	public void deleteTest(int test_id) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("DELETE from tests WHERE id = " + "('" + test.getId() + ")");
+				statement.executeUpdate("DELETE from tests WHERE id = " + test_id + ";");
 				System.out.println("New Test deleted successfully!");
 			} finally {
 				close(result);
@@ -98,7 +97,7 @@ public class TestDAO {
 		List<Test> tests = new ArrayList<>();
 
 		try {
-			Connection connection = getConnection();
+			connection = getConnection();
 			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * from tests");
 			while (rs.next()) {
@@ -109,8 +108,8 @@ public class TestDAO {
 				tests.add(new Test(id, name, rate, staff_id));
 			}
 
-		} catch (SQLException e) {
-			printSQLException(e);
+		} catch (Throwable oops) {
+			oops.printStackTrace();
 		}
 
 		return tests;
@@ -119,22 +118,28 @@ public class TestDAO {
 
 	public Test selectTest(int id) {
 		Test test = null;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
 
-		try (Connection connection = getConnection();
+			try {
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+				ResultSet rs = statement
+						.executeQuery("SELECT id, name, price, staff_id FROM tests where id =" + id + "");
 
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_TEST_BY_ID);) {
-			preparedStatement.setInt(1, id);
-			System.out.println(preparedStatement);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				String name = rs.getString("name");
-				int rate = rs.getInt("price");
-				int staff_id = rs.getInt("staff_id");
-				test = new Test(id, name, rate, staff_id);
+				while (rs.next()) {
+					String name = rs.getString("name");
+					int rate = rs.getInt("price");
+					int staff_id = rs.getInt("staff_id");
+					test = new Test(id, name, rate, staff_id);
+				}
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
 			}
-		} catch (SQLException e) {
-			printSQLException(e);
+		} catch (Throwable oops) {
+			oops.printStackTrace();
 		}
 		return test;
 	}
@@ -166,19 +171,4 @@ public class TestDAO {
 		}
 	}
 
-	private void printSQLException(SQLException ex) {
-		for (Throwable e : ex) {
-			if (e instanceof SQLException) {
-				e.printStackTrace(System.err);
-				System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-				System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-				System.err.println("Message: " + e.getMessage());
-				Throwable t = ex.getCause();
-				while (t != null) {
-					System.out.println("Cause: " + t);
-					t = t.getCause();
-				}
-			}
-		}
-	}
 }

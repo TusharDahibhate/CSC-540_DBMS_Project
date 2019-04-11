@@ -69,7 +69,12 @@ public class PatientServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 			else if(operation.equals("delete")) {
-				
+				int id = Integer.parseInt(request.getParameter("id"));
+				patientdao.deletePatient(id);
+				List<Patient> patients = patientdao.selectAllUsers();
+				request.setAttribute("patients", patients);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
+				dispatcher.forward(request, response);
 			}
 			else if(operation.equals("list")) {
 				List<Patient> patients = patientdao.selectAllUsers();

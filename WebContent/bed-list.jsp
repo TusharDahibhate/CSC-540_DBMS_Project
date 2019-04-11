@@ -45,7 +45,8 @@
 							enctype="multipart/form-data">
 							<button type="submit" name="button" value="EDIT">EDIT</button>
 							<input type="hidden" name="operation" value="EDIT" /> <input
-								type="hidden" name="id" value='${bed.id}' />
+								type="hidden" name="id" value='${bed.id}' /> <input
+								type="hidden" name="ward_id" value='${bed.wardId}' />
 						</form>
 					</td>
 					<td>
@@ -53,7 +54,8 @@
 							enctype="multipart/form-data">
 							<button type="submit" name="button" value="DELETE">DELETE</button>
 							<input type="hidden" name="operation" value="DELETE" /> <input
-								type="hidden" name="id" value='${bed.id}' />
+								type="hidden" name="id" value='${bed.id}' /> <input
+								type="hidden" name="ward_id" value='${bed.wardId}' />
 						</form>
 					</td>
 				</tr>
