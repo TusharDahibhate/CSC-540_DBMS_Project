@@ -9,8 +9,8 @@
 	<center>
 		<h1>Test Management</h1>
 		<h2>
-			<a href="TestServlet">Add New Test</a> &nbsp;&nbsp;&nbsp; <a
-				href="TestServlet">List All Tests</a>
+				Add New Test &nbsp;&nbsp;&nbsp; <a href="/tests">List
+				All Tests</a>
 
 		</h2>
 	</center>

@@ -86,7 +86,8 @@ public class TestServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			Test existingTest = testDAO.selectTest(id);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/test-form.jsp");
+			System.out.println("servlet id: "+ existingTest.getId());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("test-form.jsp");
 			request.setAttribute("test", existingTest);
 			dispatcher.forward(request, response);
 
@@ -101,7 +102,8 @@ public class TestServlet extends HttpServlet {
 		int staff_id = Integer.parseInt(request.getParameter("staff_id"));
 		int price = Integer.parseInt(request.getParameter("price"));
 		String name = request.getParameter("name");
-		Test test = new Test(name, price, staff_id);
+		int id = Integer.parseInt(request.getParameter("id"));
+		Test test = new Test(id, name, price, staff_id);
 		testDAO.updateTest(test);
 		List<Test> tests = testDAO.viewAllTests();
 		request.setAttribute("tests", tests);
