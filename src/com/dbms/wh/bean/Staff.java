@@ -5,29 +5,29 @@ public class Staff {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private Integer age;
-	private Integer phone_no;
+	private Integer phoneno;
 	private String name;
 	private String gender;
-	private String job_title;
-	private String professional_title;
+	private String jobtitle;
+	private String professionaltitle;
 	private String address;
 	private String department;
 	
-	public Staff(String name, Integer age, String gender, String job_title, String professional_title, Integer phone_no, String address, String department) {
+	public Staff(String name, Integer age, String gender, String jobtitle, String professionaltitle, Integer phoneno, String address, String department) {
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
-		this.job_title = job_title;
-		this.professional_title = professional_title;
-		this.phone_no = phone_no;
+		this.jobtitle = jobtitle;
+		this.professionaltitle = professionaltitle;
+		this.phoneno = phoneno;
 		this.address = address;
 		this.department = department;
 	}
 
 	@Override
 	public String toString() {
-		return "Staff [id=" + id + ", age=" + age + ", name=" + name + ", gender=" + gender + ", phone_no=" + phone_no
-				+ ", job_title=" + job_title + ", professional_title=" + professional_title + ", address=" + address + ",department=" + department + "]";
+		return "Staff [id=" + id + ", age=" + age + ", name=" + name + ", gender=" + gender + ", phoneno=" + phoneno
+				+ ", jobtitle=" + jobtitle + ", professionaltitle=" + professionaltitle + ", address=" + address + ",department=" + department + "]";
 	}
 
 	public int getId() {
@@ -54,20 +54,20 @@ public class Staff {
 		this.name = name;
 	}
 
-	public String getJobTitle() {
-		return job_title;
+	public String getJobtitle() {
+		return jobtitle;
 	}
 
-	public void setJobTitle(String job_title) {
-		this.job_title = job_title;
+	public void setJobtitle(String jobtitle) {
+		this.jobtitle = jobtitle;
 	}
 
-	public Integer getPhoneNo() {
-		return phone_no;
+	public Integer getPhoneno() {
+		return phoneno;
 	}
 
-	public void setPhoneNo(Integer phone_no) {
-		this.phone_no = phone_no;
+	public void setPhoneno(Integer phoneno) {
+		this.phoneno = phoneno;
 	}
 
 	public String getGender() {
@@ -78,12 +78,12 @@ public class Staff {
 		this.gender = gender;
 	}
 
-	public String getProfessionalTitle() {
-		return professional_title;
+	public String getProfessionaltitle() {
+		return professionaltitle;
 	}
 
-	public void setProfessionalTitle(String professional_title) {
-		this.professional_title = professional_title;
+	public void setProfessionaltitle(String professionaltitle) {
+		this.professionaltitle = professionaltitle;
 	}
 
 	public String getAddress() {
