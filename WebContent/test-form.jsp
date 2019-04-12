@@ -4,6 +4,10 @@
 <html>
 <head>
 <title>Wolf Hospital</title>
+<meta charset="ISO-8859-1">
+    <title>Tests</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
@@ -60,7 +64,12 @@
 				<td>
 	            	<select name="staff_id">
 						<c:forEach var="staff" items="${staffs}">
+								<c:if test="${test.staff_id == staff.id}">
+								<option value='${staff.id}' selected>${staff.id}</option>
+							</c:if>
+							<c:if test="${test.staff_id != staff.id}">
 								<option value='${staff.id}'>${staff.id}</option>
+							</c:if>
 						</c:forEach>
 					</select>	            	
 	            </td>

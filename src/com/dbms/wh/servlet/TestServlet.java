@@ -109,6 +109,8 @@ public class TestServlet extends HttpServlet {
 
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
+			List<Staff> staffs = staffDAO.selectAllDoctors();
+			request.setAttribute("staffs", staffs);
 			Test existingTest = testDAO.selectTest(id);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("test-form.jsp");
 			request.setAttribute("test", existingTest);

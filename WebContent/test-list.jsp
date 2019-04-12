@@ -4,6 +4,10 @@
 <html>
 <head>
 <title>TEST MANAGEMENT</title>
+<meta charset="ISO-8859-1">
+    <title>Tests</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>

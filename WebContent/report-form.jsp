@@ -5,7 +5,7 @@
 <head>
 <title>Wolf Hospital</title>
 <meta charset="ISO-8859-1">
-    <title>Checkin</title>
+    <title>Test Reports</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
