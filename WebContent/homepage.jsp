@@ -214,20 +214,22 @@
 			  <a href="#" onclick="funcCalled(4);">Doctor</a>
 			  </div>
 		</div>
-		<div id="selectedFunc">Patient</div>
+		<div id="selectedFunc"></div>
 		<div id="hospital" class="functionalityClass">
-			> <a href="PatientServlet">Bed Management</a><br/>
-			> <a href="PatientServlet">Ward Management</a><br/>
-			> <a href="PatientServlet">Staff Management</a>
+			> <a href="BedServlet">Bed Management</a><br/>
+			> <a href="WardServlet">Ward Management</a><br/>
+			> <a href="StaffServlet">Staff Management</a><br/>
 		</div>
 		<div id="patient" class="functionalityClass">
-			 > <a href="PatientServlet">Patient Management</a>
+			 > <a href="PatientServlet">Patient Management</a><br/>
 		</div>
 		<div id="operator" class="functionalityClass">
-			> <a href="PatientServlet"> Management</a>
+			> <a href="BillingAccountServlet">Billing Account Management</a><br/>
+			> <a href="CheckInServlet">Check-in Management</a><br/>
+			> <a href="BedServlet">Assign bed to Patient</a><br/>
 		</div>
 		<div id="doctor" class="functionalityClass">
-			> <a href="PatientServlet">Patient Management</a>
+			> <a href="PatientServlet">Patient Management</a><br/>
 		</div>
 	</div>
 	<div id="fetchedContent"></div>
