@@ -20,8 +20,8 @@ public class BedDAO {
 	private static final String SELECT_BED_BY_ID = "SELECT id, ward_id, rate, checkin_id FROM beds where id =? AND ward_id = ?";
 	private static final String SELECT_ALL_BEDS = "SELECT * FROM beds";
 	private static final String DELETE_BEDS_SQL = "DELETE FROM beds WHERE id = ? AND ward_id = ?;";
-	private static final String UPDATE_BEDS_SQL = "UPDATE beds SET rate = ?,checkin_id= ? WHERE id = ?;";
-	private static final String UPDATE_BED_RATE_SQL = "UPDATE beds SET rate = ? WHERE id = ?;";
+	private static final String UPDATE_BEDS_SQL = "UPDATE beds SET rate = ?,checkin_id= ? where id =? AND ward_id = ?;";
+	private static final String UPDATE_BED_RATE_SQL = "UPDATE beds SET rate = ? WHERE id = ? AND ward_id = ?;";
 
 	public BedDAO() {
 	}
@@ -135,11 +135,14 @@ public class BedDAO {
 				statement = connection.prepareStatement(UPDATE_BED_RATE_SQL);
 				statement.setInt(1, bed.getRate());
 				statement.setInt(2, bed.getId());
+				statement.setInt(3, bed.getWardId());
 			} else {
 				statement = connection.prepareStatement(UPDATE_BEDS_SQL);
+				System.out.println("came here!!");
 				statement.setInt(1, bed.getRate());
 				statement.setInt(2, bed.getCheckinId());
 				statement.setInt(3, bed.getId());
+				statement.setInt(4, bed.getWardId());
 			}
 
 			rowUpdated = statement.executeUpdate() > 0;
