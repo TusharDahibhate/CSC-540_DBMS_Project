@@ -8,9 +8,10 @@
 <body>
 	<center>
 		<h1>Tests Management</h1>
-		<h2>
-			<form action="test-form.jsp" method="get" enctype="multipart/form-data">
-				<button type="submit" name="button" value="create">ADD</button>
+		<div style="text-align:center">
+			<form action="TestServlet" method="get" enctype="multipart/form-data">
+				<input type="submit" class="button" value="ADD">
+             <input type="hidden" name="operation" value="add" />
 			</form>
 
 			<form action="TestServlet" method="get" enctype="multipart/form-data">
@@ -18,7 +19,7 @@
 				<input type="hidden" name="operation" value="list" />
 			</form>
 
-		</h2>
+		</div>
 	</center>
 
 	<div align="center">

@@ -42,10 +42,25 @@
 	            <td><input class="form-control" type="number" name="patient_id" required size="45"
 	                value="<c:out value='${checkin.patientid}' />" /></td>
 	        </tr>
-	        <tr>
+	        <%-- <tr>
 	            <th>Staff id</th>
 	            <td><input class="form-control" type="number" name="staff_id" required size="45"
-	                value="<c:out value='${checkin.staffid}' />" /></td>
+	                value="<c:out value='${checkin.staffid}' />" /></td>	               
+	        </tr> --%>
+	        <tr>
+	        	<th>Staff id</th>
+	        	<td>
+	            	<select name="staff_id">
+						<c:forEach var="staff" items="${stafflist}">
+							<c:if test="${checkin.staffid == staff.id}">
+								<option value='${staff.id}' selected>${staff.id}</option>
+							</c:if>
+							<c:if test="${checkin.staffid != staff.id}">
+								<option value='${staff.id}'>${staff.id}</option>
+							</c:if>
+						</c:forEach>
+					</select>	            	
+	            </td>
 	        </tr>
 	        <tr>
 	            <th>Start Date</th>

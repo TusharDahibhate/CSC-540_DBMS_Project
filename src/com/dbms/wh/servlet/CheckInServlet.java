@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.wh.bean.CheckIn;
 import com.dbms.wh.bean.Staff;
+import com.dbms.wh.bean.Ward;
 import com.dbms.wh.dao.CheckInDAO;
 import com.dbms.wh.dao.StaffDAO;
 
@@ -29,9 +30,11 @@ public class CheckInServlet extends HttpServlet {
     }
 	
 	private CheckInDAO checkindao;
+	private StaffDAO staffdao;
 
 	public void init() {
 		checkindao = new CheckInDAO();
+		staffdao = new StaffDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -82,6 +85,8 @@ public class CheckInServlet extends HttpServlet {
 	
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List<Staff> listStaff = staffdao.selectAllOperators();
+		request.setAttribute("stafflist", listStaff);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkin-form.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -90,6 +95,8 @@ public class CheckInServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		CheckIn existingCheckin = checkindao.selectCheckin(id);
+		List<Staff> listStaff = staffdao.selectAllOperators();
+		request.setAttribute("stafflist", listStaff);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkin-form.jsp");
 		request.setAttribute("checkin", existingCheckin);
 		dispatcher.forward(request, response);

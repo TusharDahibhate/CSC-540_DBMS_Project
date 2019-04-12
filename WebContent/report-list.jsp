@@ -3,19 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>MEDICAL RECORD MANAGEMENT</title>
+<title>TEST REPORT MANAGEMENT</title>
 </head>
 <body>
 	<center>
-		<h1>Medical Record Management</h1>
+		<h1>Test Reports Management</h1>
 		<h2>
-			<form action="MedicalRecordServlet" method="get"
+			<form action="report-form.jsp" method="get"
 				enctype="multipart/form-data">
-				<input type="submit" class="button" value="ADD">
-             <input type="hidden" name="operation" value="add" />
+				<button type="submit" name="button" value="create">ADD</button>
 			</form>
 
-			<form action="MedicalRecordServlet" method="get"
+			<form action="TestReportServlet" method="get"
 				enctype="multipart/form-data">
 				<button type="submit" name="button" value="list">LIST</button>
 				<input type="hidden" name="operation" value="list" />
@@ -27,34 +26,38 @@
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>List of Medical Records</h2>
+				<h2>List of Test Reports</h2>
 			</caption>
 			<tr>
 				<th>ID</th>
-				<th>Diagnosis</th>
 				<th>Check-In Id</th>
-				<th>Staff Id</th>
+				<th>Patient Name
+				<th>Test Id</th>
+				<th>Test Name</th>
+				<th>Result</th>
 			</tr>
-			<c:forEach var="rec" items="${records}">
+			<c:forEach var="rep" items="${reports}">
 				<tr>
-					<td><c:out value="${rec.id}" /></td>
-					<td><c:out value="${rec.diagnosis}" /></td>
-					<td><c:out value="${rec.checkin_id}" /></td>
-					<td><c:out value="${rec.staff_id}" /></td>
+					<td><c:out value="${rep.id}" /></td>
+					<td><c:out value="${rep.checkin_id}" /></td>
+					<td><c:out value="${rep.patient_name}" /></td>
+					<td><c:out value="${rep.test_id}" /></td>
+					<td><c:out value="${rep.test_name}" /></td>
+					<td><c:out value="${rep.result}" /></td>
 					<td>
-						<form action="MedicalRecordServlet" method="get"
+						<form action="TestReportServlet" method="get"
 							enctype="multipart/form-data">
 							<button type="submit" name="button" value="EDIT">EDIT</button>
 							<input type="hidden" name="operation" value="update" /> <input
-								type="hidden" name="id" value='${rec.id}' />
+								type="hidden" name="id" value='${rep.id}' />
 						</form>
 					</td>
 					<td>
-						<form action="MedicalRecordServlet" method="get"
+						<form action="TestReportServlet" method="get"
 							enctype="multipart/form-data">
 							<button type="submit" name="button" value="DELETE">DELETE</button>
 							<input type="hidden" name="operation" value="delete" /> <input
-								type="hidden" name="id" value='${rec.id}' />
+								type="hidden" name="id" value='${rep.id}' />
 						</form>
 					</td>
 				</tr>

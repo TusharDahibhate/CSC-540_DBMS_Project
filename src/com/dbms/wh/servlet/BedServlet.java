@@ -12,16 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.wh.bean.Bed;
+import com.dbms.wh.bean.Ward;
 import com.dbms.wh.dao.BedDAO;
+import com.dbms.wh.dao.WardDAO;
 
 @WebServlet("/BedServlet")
 public class BedServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private BedDAO bedDAO;
+	private WardDAO wardDAO;
 
 	public void init() {
 		bedDAO = new BedDAO();
+		wardDAO = new WardDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -85,6 +89,8 @@ public class BedServlet extends HttpServlet {
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List<Ward> listWard = wardDAO.selectAllWards();
+		request.setAttribute("wards", listWard);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/bed-form.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -94,6 +100,8 @@ public class BedServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		int w_id = Integer.parseInt(request.getParameter("ward_id"));
 		Bed existingBed = bedDAO.selectBed(id, w_id);
+		List<Ward> listWard = wardDAO.selectAllWards();
+		request.setAttribute("wards", listWard);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/bed-form.jsp");
 		request.setAttribute("bed", existingBed);
 		dispatcher.forward(request, response);
@@ -109,10 +117,12 @@ public class BedServlet extends HttpServlet {
 	}
 
 	private void updateBed(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		int ward_id = Integer.parseInt(request.getParameter("ward_id"));
+		
+		int id = Integer.parseInt(request.getParameter("id"));		
+		int ward_id = Integer.parseInt(request.getParameter("ward_id"));		
 		int rate = Integer.parseInt(request.getParameter("rate"));
 		int checkin_id = Integer.parseInt(request.getParameter("checkin_id"));
+		
 		Bed newBed = new Bed(id, ward_id, rate, checkin_id);
 		bedDAO.updateBed(newBed);
 		response.sendRedirect("BedServlet");

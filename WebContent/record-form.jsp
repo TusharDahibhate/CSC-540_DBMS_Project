@@ -53,13 +53,19 @@
 			</tr>
 			<tr>
 				<th>Check-In:</th>
-				<td><input type="number" name="checkin_id" size="45"
-					value="<c:out value='${record.checkin_id}' />" /></td>
+				<td><select name="checkin_id">
+						<c:forEach var="checkin" items="${checkins}">
+							<option value='${checkin.id}'>${checkin.id}</option>
+						</c:forEach>
+				</select></td>
 			</tr>
 			<tr>
 				<th>Staff Id:</th>
-				<td><input type="number" name="staff_id" size="15"
-					value="<c:out value='${record.staff_id}' />" /></td>
+				<td><select name="staff_id">
+						<c:forEach var="staff" items="${staffs}">
+							<option value='${staff.id}'>${staff.id}</option>
+						</c:forEach>
+				</select></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

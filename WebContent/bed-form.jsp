@@ -46,7 +46,7 @@
 				<input type="hidden" name="id" value="<c:out value='${bed.id}' />" />
 			</c:if>
 
-			<c:if test="${bed != null}">
+			<%-- <c:if test="${bed != null}">
 				<tr>
 					<th>Ward id</th>
 					<td><input type="number" name="ward_id" size="45"
@@ -60,7 +60,7 @@
 					<td><input type="number" name="ward_id" size="45" value=" "></td>
 				</tr>
 			</c:if>
-
+ --%>
 			<tr>
 				<th>Rate</th>
 				<td><input type="number" name="rate" size="45"
@@ -75,11 +75,30 @@
 				</tr>
 			</c:if>
 
+			<c:if test="${bed == null}">
+				<tr>
+					<th>Ward Id</th>
+					<td><select name="ward_id">
+							<c:forEach var="ward" items="${wards}">
+								<option value='${ward.id}'>${ward.id}</option>
+							</c:forEach>
+					</select></td>
+
+				</tr>
+			</c:if>
+
+			<c:if test="${bed != null}">
+				<tr>
+					<th>Ward Id</th>
+					<td><input type="number" name="ward_id" size="45"
+						value="${bed.wardId}" readonly></td>
+				</tr>
+			</c:if>
+
+
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
 					value="Save" /></td>
-
-
 			</tr>
 		</table>
 		</form>

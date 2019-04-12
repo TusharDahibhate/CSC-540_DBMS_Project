@@ -57,8 +57,13 @@
 			</tr>
 			<tr>
 				<th>Staff Id:</th>
-				<td><input type="number" name="staff_id" size="15"
-					value="<c:out value='${test.staff_id}' />" /></td>
+				<td>
+	            	<select name="staff_id">
+						<c:forEach var="staff" items="${staffs}">
+								<option value='${staff.id}'>${staff.id}</option>
+						</c:forEach>
+					</select>	            	
+	            </td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

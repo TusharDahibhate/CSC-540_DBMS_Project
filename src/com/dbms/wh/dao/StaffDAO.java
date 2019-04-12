@@ -22,6 +22,8 @@ public class StaffDAO {
 	private static final String INSERT_STAFF_SQL = "INSERT INTO staff(name, age, gender, job_title, professional_title, phone_no, address, department) VALUES " + " (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static final String SELECT_STAFF_BY_ID = "SELECT * FROM staff where id =?";
 	private static final String SELECT_ALL_STAFF = "SELECT * FROM staff";
+	private static final String SELECT_ALL_OPERATORS = "SELECT * FROM staff WHERE job_title = \"operator\";";
+	private static final String SELECT_ALL_DOCTORS = "SELECT * FROM staff WHERE job_title = \"doctor\";";
 	private static final String DELETE_STAFF_SQL = "DELETE FROM staff WHERE id = ?;";
 	private static final String UPDATE_STAFF_SQL = "UPDATE staff SET name = ?,age= ?, gender = ?, job_title = ?, professional_title = ?, phone_no = ?, address = ?, department = ? WHERE id = ?;";
 	
@@ -91,6 +93,46 @@ public class StaffDAO {
 		try (Connection connection = getConnection();
 
 			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_STAFF);) {
+			ResultSet rs = preparedStatement.executeQuery();
+			Staff s;
+			while (rs.next()) {
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s.setId(rs.getInt("id"));
+				staff.add(s);
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return staff;
+	}
+	
+	public List<Staff> selectAllDoctors() {
+
+		List<Staff> staff = new ArrayList<>();
+
+		try (Connection connection = getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_DOCTORS);) {
+			ResultSet rs = preparedStatement.executeQuery();
+			Staff s;
+			while (rs.next()) {
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s.setId(rs.getInt("id"));
+				staff.add(s);
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return staff;
+	}
+	
+	public List<Staff> selectAllOperators() {
+
+		List<Staff> staff = new ArrayList<>();
+
+		try (Connection connection = getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_OPERATORS);) {
 			ResultSet rs = preparedStatement.executeQuery();
 			Staff s;
 			while (rs.next()) {
