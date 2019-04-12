@@ -23,6 +23,20 @@ public class BillingAccount {
 		this.billing_address = billing_address;
 		this.total_charge = total_charge;
 	}
+	
+	public BillingAccount(int id, int staff_id, int checkin_id, int paid_by_person, int paid_by_insurance,
+			String payment_info, int payee_ssn, String billing_address, int total_charge) {
+		super();
+		this.id = id;
+		this.staff_id = staff_id;
+		this.checkin_id = checkin_id;
+		this.paid_by_person = paid_by_person;
+		this.paid_by_insurance = paid_by_insurance;
+		this.payment_info = payment_info;
+		this.payee_ssn = payee_ssn;
+		this.billing_address = billing_address;
+		this.total_charge = total_charge;
+	}
 
 	@Override
 	public String toString() {
