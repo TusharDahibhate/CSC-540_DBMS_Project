@@ -113,6 +113,10 @@ public class TestReportServlet extends HttpServlet {
 
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
+			List<CheckIn> checkins = checkinDAO.selectAllCheckin();
+			request.setAttribute("checkins", checkins);
+			List<Test> tests = testDAO.viewAllTests();
+			request.setAttribute("tests", tests);
 			TestReport existingTestReport = testReportDAO.selectTestReport(id);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("report-form.jsp");
 			request.setAttribute("report", existingTestReport);

@@ -4,6 +4,10 @@
 <html>
 <head>
 <title>Wolf Hospital</title>
+<meta charset="ISO-8859-1">
+    <title>Checkin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
@@ -48,24 +52,30 @@
 			</c:if>
 			<tr>
 				<th>Check-In Id:</th>
-				<td>
-	            	<select name="checkin_id">
+				<td><select name="checkin_id">
 						<c:forEach var="checkin" items="${checkins}">
+							<c:if test="${report.checkin_id == checkin.id}">
+								<option value='${checkin.id}' selected>${checkin.id}</option>
+							</c:if>
+							<c:if test="${report.checkin_id != checkin.id}">
 								<option value='${checkin.id}'>${checkin.id}</option>
+							</c:if>
 						</c:forEach>
-					</select>	            	
-	            </td>
+				</select></td>
 			</tr>
 
 			<tr>
 				<th>Test Id:</th>
-				<td>
-	            	<select name="test_id">
+				<td><select name="test_id">
 						<c:forEach var="test" items="${tests}">
+							<c:if test="${report.test_id == test.id}">
+								<option value='${test.id}' selected>${test.id}</option>
+							</c:if>
+							<c:if test="${report.test_id != test.id}">
 								<option value='${test.id}'>${test.id}</option>
+							</c:if>
 						</c:forEach>
-					</select>	            	
-	            </td>
+				</select></td>
 			</tr>
 
 			<tr>
