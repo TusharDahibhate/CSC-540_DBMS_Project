@@ -9,9 +9,10 @@
 	<center>
 		<h1>Medical Record Management</h1>
 		<h2>
-			<form action="record-form.jsp" method="get"
+			<form action="MedicalRecordServlet" method="get"
 				enctype="multipart/form-data">
-				<button type="submit" name="button" value="create">ADD</button>
+				<input type="submit" class="button" value="ADD">
+             <input type="hidden" name="operation" value="add" />
 			</form>
 
 			<form action="MedicalRecordServlet" method="get"

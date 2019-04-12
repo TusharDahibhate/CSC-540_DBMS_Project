@@ -8,7 +8,7 @@
 <body>
 	<center>
 		<h1>Tests Management</h1>
-		<h2>
+		<div style="text-align:center">
 			<form action="TestServlet" method="get" enctype="multipart/form-data">
 				<input type="submit" class="button" value="ADD">
              <input type="hidden" name="operation" value="add" />
@@ -19,7 +19,7 @@
 				<input type="hidden" name="operation" value="list" />
 			</form>
 
-		</h2>
+		</div>
 	</center>
 
 	<div align="center">
