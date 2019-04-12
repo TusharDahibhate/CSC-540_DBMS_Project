@@ -11,13 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.wh.bean.Patient;
+import com.dbms.wh.bean.Staff;
 import com.dbms.wh.bean.Test;
+import com.dbms.wh.dao.StaffDAO;
 import com.dbms.wh.dao.TestDAO;
 
 @WebServlet("/TestServlet")
 public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TestDAO testDAO = new TestDAO();
+	private StaffDAO staffDAO;
 
 	public TestServlet() {
 		super();
@@ -25,6 +28,7 @@ public class TestServlet extends HttpServlet {
 
 	public void init() {
 		testDAO = new TestDAO();
+		staffDAO = new StaffDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +43,9 @@ public class TestServlet extends HttpServlet {
 
 		try {
 			switch (option) {
+			case "add":
+				addTest(request, response);
+				break;
 			case "create":
 				createTest(request, response);
 				break;
@@ -61,6 +68,21 @@ public class TestServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 	}
+	
+	private void addTest(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		try {
+			List<Staff> staffs = staffDAO.selectAllDoctors();
+			request.setAttribute("staffs", staffs);
+			System.out.println(staffs);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/test-form.jsp");
+			dispatcher.forward(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	private void createTest(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
@@ -71,6 +93,9 @@ public class TestServlet extends HttpServlet {
 			testDAO.createTest(test);
 			List<Test> tests = testDAO.viewAllTests();
 			request.setAttribute("tests", tests);
+			List<Staff> staffs = staffDAO.selectAllDoctors();
+			request.setAttribute("staffs", staffs);
+			System.out.println(staffs);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("test-list.jsp");
 			dispatcher.forward(request, response);
 
