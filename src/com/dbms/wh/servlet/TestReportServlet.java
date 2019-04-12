@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dbms.wh.bean.CheckIn;
 import com.dbms.wh.bean.Test;
 import com.dbms.wh.bean.TestReport;
+import com.dbms.wh.dao.CheckInDAO;
 import com.dbms.wh.dao.TestDAO;
 import com.dbms.wh.dao.TestReportDAO;
 
@@ -20,13 +22,16 @@ import com.dbms.wh.dao.TestReportDAO;
 public class TestReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TestReportDAO testReportDAO;
-
+	private CheckInDAO checkinDAO;
+	private TestDAO testDAO;
 	public TestReportServlet() {
 		super();
 	}
 
 	public void init() {
 		testReportDAO = new TestReportDAO();
+		checkinDAO = new CheckInDAO();
+		testDAO = new TestDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,6 +47,9 @@ public class TestReportServlet extends HttpServlet {
 
 		try {
 			switch (option) {
+			case "add":
+				addTestReport(request, response);
+				break;
 			case "create":
 				createTestReport(request, response);
 				break;
@@ -60,6 +68,23 @@ public class TestReportServlet extends HttpServlet {
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
+		}
+
+	}
+	
+	private void addTestReport(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		try {
+			
+			List<CheckIn> checkins = checkinDAO.selectAllCheckin();
+			request.setAttribute("checkins", checkins);
+			List<Test> tests = testDAO.viewAllTests();
+			request.setAttribute("tests", tests);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("report-form.jsp");
+			dispatcher.forward(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
