@@ -108,8 +108,12 @@ public class MedicalRecordServlet extends HttpServlet {
 
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
+			List<Staff> staffs = staffDAO.selectAllDoctors();
+			request.setAttribute("staffs", staffs);
+			List<CheckIn> checkins = checkinDAO.selectAllCheckin();
+			request.setAttribute("checkins", checkins);
 			MedicalRecord existingRecord = recordDAO.selectMedicalRecord(id);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("record-form.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/record-form.jsp");
 			request.setAttribute("record", existingRecord);
 			dispatcher.forward(request, response);
 

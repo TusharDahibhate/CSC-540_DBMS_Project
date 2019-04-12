@@ -4,6 +4,10 @@
 <html>
 <head>
 <title>MEDICAL RECORD MANAGEMENT</title>
+<meta charset="ISO-8859-1">
+    <title>Medical Records</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
@@ -11,8 +15,8 @@
 		<h2>
 			<form action="MedicalRecordServlet" method="get"
 				enctype="multipart/form-data">
-				<input type="submit" class="button" value="ADD">
-             <input type="hidden" name="operation" value="add" />
+				<input type="submit" class="button" value="ADD"> <input
+					type="hidden" name="operation" value="add" />
 			</form>
 
 			<form action="MedicalRecordServlet" method="get"
@@ -33,14 +37,18 @@
 				<th>ID</th>
 				<th>Diagnosis</th>
 				<th>Check-In Id</th>
-				<th>Staff Id</th>
+				<th>Patient Name</th>
+				<th>Doctor Id</th>
+				<th>Doctor Name</th>
 			</tr>
 			<c:forEach var="rec" items="${records}">
 				<tr>
 					<td><c:out value="${rec.id}" /></td>
 					<td><c:out value="${rec.diagnosis}" /></td>
 					<td><c:out value="${rec.checkin_id}" /></td>
+					<td><c:out value="${rec.patient_name}" /></td>
 					<td><c:out value="${rec.staff_id}" /></td>
+					<td><c:out value="${rec.doctor_name}" /></td>
 					<td>
 						<form action="MedicalRecordServlet" method="get"
 							enctype="multipart/form-data">

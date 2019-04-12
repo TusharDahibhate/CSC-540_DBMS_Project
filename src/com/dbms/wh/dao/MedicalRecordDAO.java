@@ -95,7 +95,7 @@ public class MedicalRecordDAO {
 
 	public List<MedicalRecord> viewAllMedicalRecords() {
 		List<MedicalRecord> records = new ArrayList<>();
-
+		String patient_name = "", doctor_name = "";
 		try {
 			connection = getConnection();
 			statement = connection.createStatement();
@@ -105,7 +105,19 @@ public class MedicalRecordDAO {
 				String diagnosis = rs.getString("diagnosis_details");
 				int checkin_id = rs.getInt("checkin_id");
 				int staff_id = rs.getInt("staff_id");
-				records.add(new MedicalRecord(id, diagnosis, checkin_id, staff_id));
+				ResultSet rs1 = statement.executeQuery("SELECT patient_id from checkins WHERE id = " + checkin_id);
+				while (rs1.next()) {
+					int patient_id = rs1.getInt("patient_id");
+					ResultSet rs2 = statement.executeQuery("SELECT name from patients WHERE id = " + patient_id);
+					while (rs2.next()) {
+						patient_name = rs2.getString("name");
+					}
+				}
+				ResultSet rs3 = statement.executeQuery("SELECT name from staff WHERE id = " + staff_id);
+				while (rs3.next()) {
+					doctor_name = rs3.getString("name");
+				}
+				records.add(new MedicalRecord(id, diagnosis, checkin_id, patient_name, staff_id, doctor_name));
 			}
 
 		} catch (Throwable oops) {

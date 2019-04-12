@@ -32,7 +32,7 @@
 			<tr>
 				<th>ID</th>
 				<th>Check-In Id</th>
-				<th>Patient Name
+				<th>Patient Name</th>
 				<th>Test Id</th>
 				<th>Test Name</th>
 				<th>Result</th>
