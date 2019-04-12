@@ -12,15 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dbms.wh.bean.CheckIn;
 import com.dbms.wh.bean.MedicalRecord;
+import com.dbms.wh.bean.Staff;
 import com.dbms.wh.bean.Test;
+import com.dbms.wh.dao.CheckInDAO;
 import com.dbms.wh.dao.MedicalRecordDAO;
+import com.dbms.wh.dao.StaffDAO;
 
 @WebServlet("/MedicalRecordServlet")
 public class MedicalRecordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	MedicalRecordDAO recordDAO = new MedicalRecordDAO();
-
+	StaffDAO staffDAO = new StaffDAO();
+	CheckInDAO checkinDAO = new CheckInDAO();
 	public MedicalRecordServlet() {
 		super();
 	}
@@ -37,6 +42,9 @@ public class MedicalRecordServlet extends HttpServlet {
 
 		try {
 			switch (option) {
+			case "add":
+				addMedicalRecord(request, response);
+				break;
 			case "create":
 				createMedicalRecord(request, response);
 				break;
@@ -58,7 +66,24 @@ public class MedicalRecordServlet extends HttpServlet {
 		}
 
 	}
+	
+	private void addMedicalRecord(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		try {
+			
+			List<Staff> staffs = staffDAO.selectAllDoctors();
+			request.setAttribute("staffs", staffs);
+			List<CheckIn> checkins = checkinDAO.selectAllCheckin();
+			request.setAttribute("checkins", checkins);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("record-form.jsp");
+			dispatcher.forward(request, response);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	private void createMedicalRecord(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		try {
