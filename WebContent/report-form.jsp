@@ -48,14 +48,24 @@
 			</c:if>
 			<tr>
 				<th>Check-In Id:</th>
-				<td><input type="number" name="checkin_id" size="15"
-					value="<c:out value='${report.checkin_id}' />" /></td>
+				<td>
+	            	<select name="checkin_id">
+						<c:forEach var="checkin" items="${checkins}">
+								<option value='${checkin.id}'>${checkin.id}</option>
+						</c:forEach>
+					</select>	            	
+	            </td>
 			</tr>
 
 			<tr>
 				<th>Test Id:</th>
-				<td><input type="number" name="test_id" size="15"
-					value="<c:out value='${report.test_id}' />" /></td>
+				<td>
+	            	<select name="test_id">
+						<c:forEach var="test" items="${tests}">
+								<option value='${test.id}'>${test.id}</option>
+						</c:forEach>
+					</select>	            	
+	            </td>
 			</tr>
 
 			<tr>

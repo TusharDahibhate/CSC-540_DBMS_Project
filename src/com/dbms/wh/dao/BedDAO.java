@@ -18,8 +18,10 @@ public class BedDAO {
 
 	private static final String INSERT_BEDS_SQL = "INSERT INTO beds(id, ward_id, rate) VALUES " + " (?, ?, ?);";
 	private static final String SELECT_BED_BY_ID = "SELECT id, ward_id, rate, checkin_id FROM beds where id =? AND ward_id = ?";
+	private static final String SELECT_EMTPY_BEDS= "SELECT * FROM beds where checkin_id is NULL";
 	private static final String SELECT_ALL_BEDS = "SELECT * FROM beds";
 	private static final String DELETE_BEDS_SQL = "DELETE FROM beds WHERE id = ? AND ward_id = ?;";
+
 	private static final String UPDATE_BEDS_SQL = "UPDATE beds SET rate = ?,checkin_id= ? where id =? AND ward_id = ?;";
 	private static final String UPDATE_BED_RATE_SQL = "UPDATE beds SET rate = ? WHERE id = ? AND ward_id = ?;";
 
@@ -91,14 +93,36 @@ public class BedDAO {
 		return bed;
 	}
 
-	public List<Bed> selectAllBeds() {
+	public List<Bed> selectAllBeds(Boolean onlyEmpty) {
+		List<Bed> beds = new ArrayList<>();
+
+		try (Connection connection = getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement(onlyEmpty ? SELECT_EMTPY_BEDS : SELECT_ALL_BEDS);) {
+			System.out.println(preparedStatement);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int ward_id = rs.getInt("ward_id");
+				int rate = rs.getInt("rate");
+				int checkin_id = rs.getInt("checkin_id");
+				beds.add(new Bed(id, ward_id, rate, checkin_id));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return beds;
+	}
+	
+	public List<Bed> getAvailableBedsInWard(int wardId, int onlyEmpty) {
 
 		List<Bed> beds = new ArrayList<>();
 
 		try (Connection connection = getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_BEDS);) {
-			System.out.println(preparedStatement);
+			PreparedStatement preparedStatement = connection.prepareStatement(onlyEmpty == 1 ? "SELECT * FROM beds where checkin_id is NULL AND ward_id=?" : "SELECT * FROM beds where ward_id=?");) {
+			preparedStatement.setInt(1, wardId);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {

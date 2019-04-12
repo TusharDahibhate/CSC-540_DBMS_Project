@@ -11,12 +11,12 @@
 <body>
     <div style="text-align:center">
          <h2>Staff Management</h2>
-         <form action="StaffServlet" method="get" enctype="multipart/form-data">
+         <form style="display:inline-block" action="StaffServlet" method="get" enctype="multipart/form-data">
              <input type="submit" class="button" value="Add new">
              <input type="hidden" name="operation" value="ADD" />
          </form>
     
-         <form action="StaffServlet" method="get" enctype="multipart/form-data">
+         <form style="display:inline-block" action="StaffServlet" method="get" enctype="multipart/form-data">
              <input type="submit" class="button" value="List all">
              <input type="hidden" name="operation" value="LIST" />
          </form>
@@ -33,6 +33,7 @@
             <th>Phone</th>
             <th>Address</th>
             <th>Department</th>
+            <th colspan="2">Actions</th>
         </tr>
         <c:forEach var="staff" items="${listStaff}">
             <tr>
