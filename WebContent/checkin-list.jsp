@@ -20,6 +20,12 @@
              <input type="submit" class="button" value="List all">
              <input type="hidden" name="operation" value="LIST" />
          </form>
+         
+         <form action="CheckInServlet" method="get" enctype="multipart/form-data">
+             <input type="submit" class="button" value="Show Stats">
+             <input type="hidden" name="operation" value="STATS" />
+         </form>
+         
     </div>
 
     <table border="1" cellpadding="5">
@@ -56,6 +62,10 @@
             </tr>
         </c:forEach>
     </table>
+    
+    <c:if test="${curr_checkins != null}">
+        <div>Number of Patients Currently Checked-in : <button > ${curr_checkins} </button> </div>
+    </c:if>
     
 </body>
 </html>

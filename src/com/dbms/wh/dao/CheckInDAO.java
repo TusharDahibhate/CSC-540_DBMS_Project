@@ -88,6 +88,30 @@ public class CheckInDAO {
 		return checkin;
 	}
 	
+	public int getCurrentlyCheckedinPatients() {
+		int total = 0;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("select count(id) from checkins where ( end_date > DATE(NOW()) AND start_date <= DATE(NOW()) ) OR (start_date <= DATE(NOW()) AND end_date IS NULL);");
+				while (rs.next()) {
+					total = rs.getInt(1);
+					//System.out.println(total);
+				}
+				
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+		return total;
+	}
+	
 	public List<CheckIn> selectAllCheckin() {
 
 		List<CheckIn> checkin = new ArrayList<>();
@@ -151,6 +175,33 @@ public class CheckInDAO {
 					System.out.println("Cause: " + t);
 					t = t.getCause();
 				}
+			}
+		}
+	}
+	
+	static void close(Connection connection) {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (Throwable whatever) {
+			}
+		}
+	}
+
+	static void close(Statement statement) {
+		if (statement != null) {
+			try {
+				statement.close();
+			} catch (Throwable whatever) {
+			}
+		}
+	}
+
+	static void close(ResultSet result) {
+		if (result != null) {
+			try {
+				result.close();
+			} catch (Throwable whatever) {
 			}
 		}
 	}

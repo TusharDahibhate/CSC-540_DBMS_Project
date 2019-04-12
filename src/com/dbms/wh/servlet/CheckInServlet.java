@@ -69,6 +69,8 @@ public class CheckInServlet extends HttpServlet {
 			case "LIST":
 				listCheckin(request, response);
 				break;
+			case "STATS":
+				statDisplay(request, response);
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
@@ -77,6 +79,21 @@ public class CheckInServlet extends HttpServlet {
 	
 	private void listCheckin(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		List<CheckIn> listCheckin = checkindao.selectAllCheckin();
+		request.setAttribute("listCheckin", listCheckin);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("checkin-list.jsp");
+		dispatcher.forward(request, response);
+	}
+	private void statDisplay(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		String month = request.getParameter("statMonth");
+		if(month != null) {
+			System.out.println("Inside month");
+		}
+		System.out.println("Inside Total Patiens Currently Checked In");
+		int curr_checkins = checkindao.getCurrentlyCheckedinPatients();
+		request.setAttribute("curr_checkins", curr_checkins);
 		List<CheckIn> listCheckin = checkindao.selectAllCheckin();
 		request.setAttribute("listCheckin", listCheckin);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("checkin-list.jsp");
