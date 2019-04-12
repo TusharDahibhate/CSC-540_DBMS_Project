@@ -69,7 +69,7 @@
 	        </tr>
 	        <tr>
 	            <th>End date</th>
-	            <td><input class="form-control" type="date" name="end_date" required size="45"
+	            <td><input class="form-control" type="date" name="end_date" size="45"
 	                value="<c:out value='${checkin.enddate}' />" /></td>
 	        </tr>
 	        <tr>

@@ -157,7 +157,7 @@ public class CheckInServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
+	
 	private void deleteCheckin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		checkindao.deleteCheckin(id);

@@ -59,6 +59,14 @@
                         <input type="hidden" name="id" value='${checkin.id}' />
                     </form>
                 </td>
+                <td>
+                    <form action="CheckoutServlet" method="get"
+                        enctype="multipart/form-data">
+                        <button type="submit" name="button" value="CHECKOUT"><a>Checkout</a></button>
+                        <input type="hidden" name="operation" value="CHECKOUT" />
+                        <input type="hidden" name="id" value='${checkin.id}' />
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
