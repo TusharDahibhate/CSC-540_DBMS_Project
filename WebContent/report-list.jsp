@@ -9,9 +9,10 @@
 	<center>
 		<h1>Test Reports Management</h1>
 		<h2>
-			<form action="report-form.jsp" method="get"
+			<form action="TestReportServlet" method="get"
 				enctype="multipart/form-data">
-				<button type="submit" name="button" value="create">ADD</button>
+				<input type="submit" class="button" value="ADD">
+             <input type="hidden" name="operation" value="add" />
 			</form>
 
 			<form action="TestReportServlet" method="get"
