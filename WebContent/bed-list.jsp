@@ -3,64 +3,69 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>BED MANAGEMENT</title>
+    <meta charset="ISO-8859-1">
+    <title>Beds</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
-	<center>
-		<h1>User Management</h1>
-		<h2>
-			<form action="BedServlet" method="get" enctype="multipart/form-data">
-				<button type="submit" name="button" value="ADD">ADD</button>
-				<input type="hidden" name="operation" value="ADD" />
-			</form>
+    <div style="text-align:center">
+         <h2>Bed Management</h2>
+         <form action="BedServlet" method="get" enctype="multipart/form-data">
+             <input type="submit" class="button" value="Add new">
+             <input type="hidden" name="operation" value="ADD" />
+         </form>
+    
+         <form action="BedServlet" method="get" enctype="multipart/form-data">
+             <input type="submit" class="button" value="List all">
+             <input type="hidden" name="operation" value="LIST" />
+         </form>
+    </div>
 
-			<form action="BedServlet" method="get" enctype="multipart/form-data">
-				<button type="submit" name="button" value="LIST">LIST</button>
-				<input type="hidden" name="operation" value="LIST" />
-			</form>
-
-		</h2>
-	</center>
-
-	<div align="center">
-		<table border="1" cellpadding="5">
-			<caption>
-				<h2>List of Beds</h2>
-			</caption>
+	<table border="1" cellpadding="5">
+		<tr>
+			<th>ID</th>
+			<th>Ward Id</th>
+			<th>Rate</th>
+			<th>Checkin Id</th>
+			<th colspan="3">Actions</th>
+		</tr>
+		<c:forEach var="bed" items="${listBed}">
 			<tr>
-				<th>ID</th>
-				<th>Ward Id</th>
-				<th>Rate</th>
-				<th>Checkin Id</th>
-				<th>Actions</th>
+				<td><c:out value="${bed.id}" /></td>
+				<td><c:out value="${bed.wardId}" /></td>
+				<td><c:out value="${bed.rate}" /></td>
+				<td><c:out value="${bed.checkinId}" /></td>
+				<td>
+					<form action="BedServlet" method="get"
+						enctype="multipart/form-data">
+						<button type="submit" name="button" value="EDIT"><a>Edit</a></button>
+						<input type="hidden" name="operation" value="EDIT" /> <input
+							type="hidden" name="id" value='${bed.id}' /> <input
+							type="hidden" name="ward_id" value='${bed.wardId}' />
+					</form>
+				</td>
+				<td>
+					<form action="BedServlet" method="get"
+						enctype="multipart/form-data">
+						<button type="submit" name="button" value="DELETE"><a>Delete</a></button>
+						<input type="hidden" name="operation" value="DELETE" /> <input
+							type="hidden" name="id" value='${bed.id}' /> <input
+							type="hidden" name="ward_id" value='${bed.wardId}' />
+					</form>
+				</td>
+				<c:if test="${bed.checkinId == 0}">
+				   <td>
+					   <form action="BedServlet" method="get" enctype="multipart/form-data">
+                            <button type="submit" name="button" value="Assign"><a>Assign</a></button>
+                            <input type="hidden" name="operation" value="EDIT" />
+                            <input type="hidden" name="id" value='${bed.id}' />
+                            <input type="hidden" name="ward_id" value='${bed.wardId}' />
+                        </form>
+                       </td>
+                   </c:if>
 			</tr>
-			<c:forEach var="bed" items="${listBed}">
-				<tr>
-					<td><c:out value="${bed.id}" /></td>
-					<td><c:out value="${bed.wardId}" /></td>
-					<td><c:out value="${bed.rate}" /></td>
-					<td><c:out value="${bed.checkinId}" /></td>
-					<td>
-						<form action="BedServlet" method="get"
-							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
-							<input type="hidden" name="operation" value="EDIT" /> <input
-								type="hidden" name="id" value='${bed.id}' /> <input
-								type="hidden" name="ward_id" value='${bed.wardId}' />
-						</form>
-					</td>
-					<td>
-						<form action="BedServlet" method="get"
-							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
-							<input type="hidden" name="operation" value="DELETE" /> <input
-								type="hidden" name="id" value='${bed.id}' /> <input
-								type="hidden" name="ward_id" value='${bed.wardId}' />
-						</form>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
+		</c:forEach>
+	</table>
 </body>
 </html>
