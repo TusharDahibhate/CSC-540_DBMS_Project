@@ -59,6 +59,8 @@ public class BedServlet extends HttpServlet {
 			case "LIST":
 				listBed(request, response);
 				break;
+			case "LISTEMPTY":
+				listEmptyBeds(request, response);
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
@@ -67,7 +69,15 @@ public class BedServlet extends HttpServlet {
 
 	private void listBed(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Bed> listBed = bedDAO.selectAllBeds();
+		List<Bed> listBed = bedDAO.selectAllBeds(false);
+		request.setAttribute("listBed", listBed);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("bed-list.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void listEmptyBeds(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<Bed> listBed = bedDAO.selectAllBeds(true);
 		request.setAttribute("listBed", listBed);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("bed-list.jsp");
 		dispatcher.forward(request, response);
