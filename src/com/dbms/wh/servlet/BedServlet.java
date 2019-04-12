@@ -124,5 +124,4 @@ public class BedServlet extends HttpServlet {
 		bedDAO.deleteBed(id, w_id);
 		response.sendRedirect("BedServlet");
 	}
-
 }

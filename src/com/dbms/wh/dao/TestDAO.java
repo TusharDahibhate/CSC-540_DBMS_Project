@@ -44,7 +44,7 @@ public class TestDAO {
 				Connection connection = getConnection();
 				statement = connection.createStatement();
 				statement.executeUpdate("INSERT INTO tests (name, price, staff_id) VALUES" + "('" + test.getName()
-						+ "','" + test.getName() + "','" + test.getStaff() + ")");
+						+ "'," + test.getPrice() + "," + test.getStaff_id() + ")");
 				System.out.println("New Test added successfully!");
 			} finally {
 				close(result);

@@ -2,10 +2,13 @@ package com.dbms.wh.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,41 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.wh.bean.CheckIn;
+import com.dbms.wh.bean.Staff;
 import com.dbms.wh.dao.CheckInDAO;
+import com.dbms.wh.dao.StaffDAO;
 
 @WebServlet("/CheckInServlet")
 public class CheckInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public CheckInServlet() {
-		super();
-	}
+        super();
+    }
+	
+	private CheckInDAO checkindao;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		CheckInDAO checkindao = new CheckInDAO();
-		PrintWriter out = response.getWriter();
-		// String id = request.getParameter("id");
-		try {
-			if (request.getParameter("operation").equals("create")) {
-				// Converting date from Java to SQL
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				Date startDate = format.parse(request.getParameter("start_date"));
-				Date endDate = request.getParameter("end_date") != null ? format.parse(request.getParameter("end_date"))
-						: null;
-				CheckIn checkin = new CheckIn(Integer.parseInt(request.getParameter("patient_id")),
-						Integer.parseInt(request.getParameter("staff_id")), startDate, endDate);
-				checkindao.createCheckIn(checkin);
-			} else if (request.getParameter("operation").equals("update")) {
-
-			} else if (request.getParameter("operation").equals("delete")) {
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void init() {
+		checkindao = new CheckInDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -55,4 +39,104 @@ public class CheckInServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String option = request.getParameter("operation");
+		if (option == null) {
+			option = "LIST";
+		}
+		
+		try {
+			switch (option) {
+			case "ADD":
+				showNewForm(request, response);
+				break;
+			case "INSERT":
+				insertCheckin(request, response);
+				break;
+			case "DELETE":
+				deleteCheckin(request, response);
+				break;
+			case "EDIT":
+				showEditForm(request, response);
+				break;
+			case "UPDATE":
+				updateCheckin(request, response);
+				break;
+			case "LIST":
+				listCheckin(request, response);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
+	}
+	
+	private void listCheckin(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<CheckIn> listCheckin = checkindao.selectAllCheckin();
+		request.setAttribute("listCheckin", listCheckin);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("checkin-list.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkin-form.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		CheckIn existingCheckin = checkindao.selectCheckin(id);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/checkin-form.jsp");
+		request.setAttribute("checkin", existingCheckin);
+		dispatcher.forward(request, response);
+	}
+
+	private void insertCheckin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		// Converting date from Java to SQL
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = null, endDate = null;
+		try {
+			startDate = format.parse(request.getParameter("start_date"));
+			endDate = request.getParameter("end_date") != null ? format.parse(request.getParameter("end_date"))
+					: null;
+
+			CheckIn checkin = new CheckIn(Integer.parseInt(request.getParameter("patient_id")),
+					Integer.parseInt(request.getParameter("staff_id")), startDate, endDate);
+			checkindao.insertCheckin(checkin);
+			response.sendRedirect("CheckInServlet");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void updateCheckin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date startDate = null, endDate = null;
+		int id = Integer.parseInt(request.getParameter("id"));
+		try {
+			startDate = format.parse(request.getParameter("start_date"));
+			endDate = request.getParameter("end_date") != null ? format.parse(request.getParameter("end_date"))
+					: null;
+
+			CheckIn checkin = new CheckIn(Integer.parseInt(request.getParameter("patient_id")),
+					Integer.parseInt(request.getParameter("staff_id")), startDate, endDate);
+			checkin.setId(id);
+			checkindao.updateCheckin(checkin);
+			response.sendRedirect("CheckInServlet");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteCheckin(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		checkindao.deleteCheckin(id);
+		response.sendRedirect("CheckInServlet");
+	}
 }

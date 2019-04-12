@@ -86,7 +86,6 @@ public class TestServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			Test existingTest = testDAO.selectTest(id);
-			System.out.println("servlet id: " + existingTest.getId());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("test-form.jsp");
 			request.setAttribute("test", existingTest);
 			dispatcher.forward(request, response);
