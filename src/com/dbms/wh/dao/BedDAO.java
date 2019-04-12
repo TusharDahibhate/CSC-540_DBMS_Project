@@ -94,13 +94,35 @@ public class BedDAO {
 	}
 
 	public List<Bed> selectAllBeds(Boolean onlyEmpty) {
-
 		List<Bed> beds = new ArrayList<>();
 
 		try (Connection connection = getConnection();
 
 			PreparedStatement preparedStatement = connection.prepareStatement(onlyEmpty ? SELECT_EMTPY_BEDS : SELECT_ALL_BEDS);) {
 			System.out.println(preparedStatement);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int ward_id = rs.getInt("ward_id");
+				int rate = rs.getInt("rate");
+				int checkin_id = rs.getInt("checkin_id");
+				beds.add(new Bed(id, ward_id, rate, checkin_id));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return beds;
+	}
+	
+	public List<Bed> getAvailableBedsInWard(int wardId, int onlyEmpty) {
+
+		List<Bed> beds = new ArrayList<>();
+
+		try (Connection connection = getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement(onlyEmpty == 1 ? "SELECT * FROM beds where checkin_id is NULL AND ward_id=?" : "SELECT * FROM beds where ward_id=?");) {
+			preparedStatement.setInt(1, wardId);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {

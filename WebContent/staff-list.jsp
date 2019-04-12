@@ -33,6 +33,7 @@
             <th>Phone</th>
             <th>Address</th>
             <th>Department</th>
+            <th colspan="2">Actions</th>
         </tr>
         <c:forEach var="staff" items="${listStaff}">
             <tr>

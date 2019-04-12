@@ -24,6 +24,7 @@
          <form style="display:inline-block" action="BedServlet" method="get" enctype="multipart/form-data">
              <input type="submit" class="button" value="Show only empty beds">
              <input type="hidden" name="operation" value="LISTEMPTY" />
+             <input type="hidden" name="ward_id" value="${ward_id}" />
          </form>
     </div>
 

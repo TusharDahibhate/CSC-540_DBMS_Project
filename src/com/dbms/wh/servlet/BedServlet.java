@@ -65,6 +65,10 @@ public class BedServlet extends HttpServlet {
 				break;
 			case "LISTEMPTY":
 				listEmptyBeds(request, response);
+				break;
+			case "SHOW_BY_WARD":
+				listBedsByWard(request, response);
+				break;
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
@@ -81,8 +85,23 @@ public class BedServlet extends HttpServlet {
 	
 	private void listEmptyBeds(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		if(request.getParameter("ward_id") != "") {
+			listBedsByWard(request, response);
+			return;
+		}
 		List<Bed> listBed = bedDAO.selectAllBeds(true);
 		request.setAttribute("listBed", listBed);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("bed-list.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void listBedsByWard(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int ward_id = Integer.parseInt(request.getParameter("ward_id"));
+		int empty = request.getParameter("empty") != null ? Integer.parseInt(request.getParameter("empty")) : 1;
+		List<Bed> listBed = bedDAO.getAvailableBedsInWard(ward_id, empty);
+		request.setAttribute("listBed", listBed);
+		request.setAttribute("ward_id", ward_id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("bed-list.jsp");
 		dispatcher.forward(request, response);
 	}
