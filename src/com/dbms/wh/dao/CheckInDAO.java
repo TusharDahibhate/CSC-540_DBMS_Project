@@ -186,6 +186,16 @@ public class CheckInDAO {
 		return rowUpdated;
 	}
 	
+	public boolean checkout(int checkin_id) throws SQLException {
+		boolean rowUpdated;
+		try (Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("UPDATE checkins SET end_date = DATE(NOW()) WHERE id = ?;");) {
+			preparedStatement.setInt(1, checkin_id);
+			rowUpdated = preparedStatement.executeUpdate() > 0;
+		}
+		return rowUpdated;
+	}
+	
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {

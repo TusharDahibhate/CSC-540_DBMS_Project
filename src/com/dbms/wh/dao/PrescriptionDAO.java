@@ -78,6 +78,26 @@ public class PrescriptionDAO {
 		}
 		return prescription;
 	}
+	
+	public int getBill(int checkin_id) {
+
+		try (Connection connection = getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement("select sum(m.price * p.quantity) as total from medical_records mr, prescriptions p, medications m where mr.checkin_id=? AND mr.id=p.record_id AND p.medication_id=m.id;");) {
+			preparedStatement.setInt(1, checkin_id);
+			System.out.println(preparedStatement);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				return rs.getInt("total");
+				
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return 0;
+	}
 
 	public List<Prescription> selectAllPrescriptions() {
 

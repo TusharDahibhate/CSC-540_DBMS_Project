@@ -175,6 +175,41 @@ public class BedDAO {
 		}
 		return rowUpdated;
 	}
+	
+	public Boolean unassignBed(int checkin_id) {
+		boolean rowUpdated = false;
+		try {
+			Connection connection = getConnection();
+			PreparedStatement statement = null;
+
+			statement = connection.prepareStatement("UPDATE beds SET checkin_id = NULL where checkin_id = ?;");
+			statement.setInt(1, checkin_id);
+
+			rowUpdated = statement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return rowUpdated;
+	}
+	
+	public int getBill(int checkin_id) {
+		try (Connection connection = getConnection();
+
+				PreparedStatement preparedStatement = connection.prepareStatement("select (b.rate * DATEDIFF(c.end_date, c.start_date)) as total from checkins c, beds b where c.id=? AND c.id=b.checkin_id;");) {
+				preparedStatement.setInt(1, checkin_id);
+				System.out.println(preparedStatement);
+				
+				ResultSet rs = preparedStatement.executeQuery();
+
+				while (rs.next()) {
+					return rs.getInt("total");
+					
+				}
+			} catch (SQLException e) {
+				printSQLException(e);
+			}
+			return 0;
+	}
 
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {

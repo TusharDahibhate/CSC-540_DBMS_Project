@@ -2,12 +2,14 @@ package com.dbms.wh.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dbms.wh.bean.Prescription;
 import com.dbms.wh.bean.Test;
 import com.dbms.wh.bean.TestReport;
 
@@ -93,6 +95,27 @@ public class TestReportDAO {
 			oops.printStackTrace();
 		}
 	}
+	
+	public int getBill(int checkin_id) {
+
+		try (Connection connection = getConnection();
+
+			PreparedStatement preparedStatement = connection.prepareStatement("select sum(t.price) as total from test_reports tr, tests t where tr.checkin_id=? AND tr.test_id=t.id ;");) {
+			preparedStatement.setInt(1, checkin_id);
+			System.out.println(preparedStatement);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				return rs.getInt("total");
+				
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+		return 0;
+	}
+
 
 	public List<TestReport> viewAllTestReports() {
 		List<TestReport> reports = new ArrayList<>();
