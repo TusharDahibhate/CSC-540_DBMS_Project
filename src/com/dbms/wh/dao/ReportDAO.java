@@ -21,6 +21,7 @@ public class ReportDAO {
 	Connection connection = null;
 	Statement statement = null;
 	ResultSet result = null;
+	BedDAO bedDAO = new BedDAO();
 
 	public ReportDAO() {
 
@@ -39,29 +40,14 @@ public class ReportDAO {
 		return connection;
 	}
 
-	public int createWardBill(int checkin_id, CheckIn checkin) {
-		int days = 0, rate = 0;
+	public int createWardBill(int checkin_id) {
+		int rate = 0;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			try {
-				Connection connection = getConnection();
-				statement = connection.createStatement();
-				ResultSet rs = statement.executeQuery("SELECT rate from beds WHERE checkin_id = " + checkin.getId());
-				Date start_date = checkin.getStartdate();
-				Date end_date = checkin.getEnddate();
-				long diff = end_date.getTime() - start_date.getTime();
-				days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-				while (rs.next()) {
-					rate = rs.getInt("rate");
-				}
-				rate = rate * days;
-			} finally {
-				close(result);
-				close(statement);
-				close(connection);
-			}
 
-		} catch (Throwable oops) {
+			rate = bedDAO.getBill(checkin_id);
+		}
+
+		catch (Throwable oops) {
 			oops.printStackTrace();
 		}
 		return rate;
