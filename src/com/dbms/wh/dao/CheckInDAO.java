@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.sql.Types;
 //import java.util.Date;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.dbms.wh.bean.CheckIn;
@@ -88,6 +89,28 @@ public class CheckInDAO {
 		return checkin;
 	}
 	
+	public LinkedHashMap<Integer, Integer> getPatientsByMonth(){
+		LinkedHashMap<Integer, Integer> lhm = new LinkedHashMap<Integer, Integer>();
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			try {
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("select MONTH(start_date), count(id) from checkins group by MONTH(start_date);");
+				while (rs.next()) {
+					lhm.put(rs.getInt(1), rs.getInt(2));
+				}
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+		return lhm;
+	}
+	
 	public int getCurrentlyCheckedinPatients() {
 		int total = 0;
 		try {
@@ -98,7 +121,6 @@ public class CheckInDAO {
 				ResultSet rs = statement.executeQuery("select count(id) from checkins where ( end_date > DATE(NOW()) AND start_date <= DATE(NOW()) ) OR (start_date <= DATE(NOW()) AND end_date IS NULL);");
 				while (rs.next()) {
 					total = rs.getInt(1);
-					//System.out.println(total);
 				}
 				
 			} finally {
@@ -111,6 +133,7 @@ public class CheckInDAO {
 		}
 		return total;
 	}
+	
 	
 	public List<CheckIn> selectAllCheckin() {
 

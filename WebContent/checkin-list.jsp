@@ -73,6 +73,11 @@
     
     <c:if test="${curr_checkins != null}">
         <div>Number of Patients Currently Checked-in : <button > ${curr_checkins} </button> </div>
+        <div>
+        <c:forEach var="type" items="${patientsByMonth}">
+		   Month: ${type.key} had a total of: ${type.value} Patients <br/>
+		</c:forEach>
+        </div>
     </c:if>
     
 </body>

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -93,6 +94,8 @@ public class CheckInServlet extends HttpServlet {
 		}
 		System.out.println("Inside Total Patiens Currently Checked In");
 		int curr_checkins = checkindao.getCurrentlyCheckedinPatients();
+		LinkedHashMap <Integer, Integer> patientsByMonth = checkindao.getPatientsByMonth();
+		request.setAttribute("patientsByMonth", patientsByMonth);
 		request.setAttribute("curr_checkins", curr_checkins);
 		List<CheckIn> listCheckin = checkindao.selectAllCheckin();
 		request.setAttribute("listCheckin", listCheckin);
