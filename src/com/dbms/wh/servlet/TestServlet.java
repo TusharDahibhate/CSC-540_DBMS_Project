@@ -143,6 +143,10 @@ public class TestServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			testDAO.deleteTest(id);
+			List<Test> tests = testDAO.viewAllTests();
+			request.setAttribute("tests", tests);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("test-list.jsp");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

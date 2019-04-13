@@ -88,9 +88,9 @@ public class MedicalRecordServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 		try {
 			int staff_id = Integer.parseInt(request.getParameter("staff_id"));
-			int price = Integer.parseInt(request.getParameter("price"));
+			int checkin_id = Integer.parseInt(request.getParameter("checkin_id"));
 			String diagnosis = request.getParameter("diagnosis");
-			MedicalRecord record = new MedicalRecord(diagnosis, price, staff_id);
+			MedicalRecord record = new MedicalRecord(diagnosis, checkin_id, staff_id);
 			recordDAO.createMedicalRecord(record);
 			List<MedicalRecord> records = recordDAO.viewAllMedicalRecords();
 			request.setAttribute("records", records);
@@ -144,6 +144,10 @@ public class MedicalRecordServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
 			recordDAO.deleteMedicalRecord(id);
+			List<MedicalRecord> records = recordDAO.viewAllMedicalRecords();
+			request.setAttribute("records", records);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("record-list.jsp");
+			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

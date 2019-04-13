@@ -62,7 +62,7 @@ public class TestReportDAO {
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("UPDATE tests SET checkin_id = " + testReport.getCheckin_id() + ", test_id = "
+				statement.executeUpdate("UPDATE test_reports SET checkin_id = " + testReport.getCheckin_id() + ", test_id = "
 						+ testReport.getTest_id() + ", result = '" + testReport.getResult() + "' WHERE id = "
 						+ testReport.getId());
 				System.out.println("New Test Report updated successfully!");
@@ -82,7 +82,7 @@ public class TestReportDAO {
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
 				statement = connection.createStatement();
-				statement.executeUpdate("DELETE from tests WHERE id = " + report_id + ";");
+				statement.executeUpdate("DELETE from test_reports WHERE id = " + report_id + ";");
 				System.out.println("New Test Report deleted successfully!");
 			} finally {
 				close(result);
