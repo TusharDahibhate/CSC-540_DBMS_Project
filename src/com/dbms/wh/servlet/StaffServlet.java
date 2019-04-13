@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dbms.wh.bean.Patient;
 import com.dbms.wh.bean.Staff;
 import com.dbms.wh.dao.StaffDAO;
 
@@ -65,6 +66,8 @@ public class StaffServlet extends HttpServlet {
 			case "LIST":
 				listStaff(request, response);
 				break;
+			case "STATS":
+				statDisplay(request, response);
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
@@ -118,5 +121,22 @@ public class StaffServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		staffdao.deleteStaff(id);
 		response.sendRedirect("StaffServlet");
+	}
+	
+	private void statDisplay(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		
+		String doc = request.getParameter("id");
+		if(doc != null) {
+			List<Patient> patients = staffdao.selectPatientUnderADoctor(Integer.parseInt(doc));
+			request.setAttribute("patients", patients);
+		}
+		System.out.println("Inside Info of staffs grouped by role!");
+		List<Staff> staffOrderbyRole = staffdao.staffOrderbyRole();
+		request.setAttribute("staffOrderbyRole", staffOrderbyRole);
+		List<Staff> listStaff = staffdao.selectAllStaff();
+		request.setAttribute("listStaff", listStaff);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("staff-list.jsp");
+		dispatcher.forward(request, response);
 	}
 }

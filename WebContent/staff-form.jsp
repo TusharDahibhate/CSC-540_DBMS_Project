@@ -20,6 +20,7 @@
 	         <input type="submit" class="button" value="List all">
 	         <input type="hidden" name="operation" value="LIST" />
 	     </form>
+         
     </div>
     
     <c:if test="${staff != null}">

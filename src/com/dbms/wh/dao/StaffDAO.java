@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.dbms.wh.bean.Patient;
 import com.dbms.wh.bean.Staff;
 
 public class StaffDAO {
@@ -104,6 +106,67 @@ public class StaffDAO {
 			printSQLException(e);
 		}
 		return staff;
+	}
+	
+	public List<Staff> staffOrderbyRole() {
+
+		List<Staff> staff = new ArrayList<>();
+
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			connection = DriverManager.getConnection(jdbcURL, user, password);
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * from staff order by job_title;");
+			int count = 0;
+			String prevRole = "";
+			while (rs.next()) {
+				Staff s;
+				count++;
+				if(count != 0) {
+					if(prevRole.equals(rs.getString("job_title")) == false) {
+						Staff x; // dummy value
+						x = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+						x.setId(-1);
+						staff.add(x);
+					}
+				}
+				prevRole = rs.getString("job_title");
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s.setId(rs.getInt("id"));
+				staff.add(s);
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("From Staff order by Role");
+		}
+		return staff;
+	}
+	
+	
+	public List<Patient> selectPatientUnderADoctor(int id) {
+
+		List<Patient> patients = new ArrayList<>();
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			connection = DriverManager.getConnection(jdbcURL, user, password);
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * from patients WHERE id IN  (select patient_id from checkins c1 JOIN medical_records m1 ON c1.id = m1.checkin_id AND m1.staff_id = "+  id +")");
+
+			while (rs.next()) {
+				int age = rs.getInt("age");
+				String ssn = rs.getString("ssn");
+				String name = rs.getString("name");
+				Date dob = rs.getDate("dob");
+				String gender = rs.getString("gender");
+				String phoneNo = rs.getString("phone_no");
+				String address = rs.getString("address");
+				patients.add(new Patient(id, age, name, ssn, phoneNo, gender, dob, address));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("From Staff DAO patients under a doctor");
+		}
+		return patients;
 	}
 	
 	public List<Staff> selectAllDoctors() {
