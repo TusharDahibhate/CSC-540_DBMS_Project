@@ -25,6 +25,11 @@
              <input type="submit" class="button" value="Show beds count by ward">
              <input type="hidden" name="operation" value="LISTEMPTY" />
          </form>
+         
+         <form style="display:inline-block" action="WardServlet" method="get" enctype="multipart/form-data">
+             <input type="submit" class="button" value="Show Ward usage Percentage">
+             <input type="hidden" name="operation" value="usgpercent" />
+         </form>
     </div>
 
    <table border="1" cellpadding="5">
@@ -77,5 +82,12 @@
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<c:if test="${usgpercentward != null}">
+        <c:forEach var="type" items="${usgpercentward}">
+		   Ward ID: ${type.key} is ${type.value} % occupied <br/>
+		</c:forEach>
+        </div>
+    </c:if>
 </body>
 </html>

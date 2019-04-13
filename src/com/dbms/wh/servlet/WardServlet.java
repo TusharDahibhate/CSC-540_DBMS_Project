@@ -2,6 +2,7 @@ package com.dbms.wh.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -59,10 +60,23 @@ public class WardServlet extends HttpServlet {
 			case "LIST":
 				listWard(request, response);
 				break;
+			case "usgpercent":
+				usgpercent(request, response);
+				break;
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
+	}
+	
+	private void usgpercent(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		LinkedHashMap <Integer, Float> usgpercentward = wardDAO.getUsagePercent();
+		request.setAttribute("usgpercentward", usgpercentward);
+		List<Ward> listWard = wardDAO.selectAllWards();
+		request.setAttribute("listWard", listWard);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("ward-list.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void listWard(HttpServletRequest request, HttpServletResponse response)
