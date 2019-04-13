@@ -75,6 +75,7 @@ public class PatientDAO {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
 				connection = DriverManager.getConnection(jdbcURL, user, password);
+				connection.setAutoCommit(false);
 				statement = connection.createStatement();
 				statement.executeUpdate("DELETE from patients where id = " + patient_id + ";");
 				System.out.println("Patient deleted successfully!");
