@@ -78,17 +78,16 @@ public class CheckoutServlet extends HttpServlet {
 	private void displayBill(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		TestReport rep = testDAO.selectPatientTestReport(id);
+		List<TestReport> testbill = testDAO.selectPatientTestReport(id);
 		checkindao.checkout(id);
 		checkindao = new CheckInDAO();
 		checkin = checkindao.selectCheckin(id);
-		int rate = reportDAO.createWardBill(id, checkin);
+		int rate = reportDAO.createWardBill(id);
 		wardbill = new Report(checkin.getPatientid(), checkin.getId(), checkin.getStartdate(), checkin.getEnddate(),
 				rate);
 		request.setAttribute("wardbill", wardbill);
 		List<Report> prescbill = reportDAO.getPrescriptionBill(id);
 		request.setAttribute("prescbill", prescbill);
-		List<TestReport> testbill = testDAO.viewTestReports(rep.getId());
 		request.setAttribute("testbill", testbill);
 		beddao.unassignBed(id);
 		int pBill = pdao.getBill(id);
