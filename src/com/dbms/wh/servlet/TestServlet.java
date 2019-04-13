@@ -94,7 +94,6 @@ public class TestServlet extends HttpServlet {
 			request.setAttribute("tests", tests);
 			List<Staff> staffs = staffDAO.selectAllDoctors();
 			request.setAttribute("staffs", staffs);
-			System.out.println(staffs);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("test-list.jsp");
 			dispatcher.forward(request, response);
 

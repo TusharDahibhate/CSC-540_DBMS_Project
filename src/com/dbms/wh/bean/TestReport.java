@@ -7,6 +7,7 @@ public class TestReport {
 	private String result;
 	private String patient_name;
 	private String test_name;
+	private float price;
 
 	public TestReport(int id, int checkin_id, int test_id, String result) {
 		this.id = id;
@@ -28,6 +29,16 @@ public class TestReport {
 		this.checkin_id = checkin_id;
 		this.test_id = test_id;
 		this.result = result;
+	}
+	
+	public TestReport(int id, int checkin_id, String patient_name, int test_id, String test_name, float price, String result) {
+		this.id = id;
+		this.patient_name = patient_name;
+		this.test_name = test_name;
+		this.checkin_id = checkin_id;
+		this.test_id = test_id;
+		this.result = result;
+		this.price = price;
 	}
 
 	public int getId() {
@@ -76,6 +87,14 @@ public class TestReport {
 
 	public void setTest_name(String test_name) {
 		this.test_name = test_name;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }

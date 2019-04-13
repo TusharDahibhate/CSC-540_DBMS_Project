@@ -120,6 +120,7 @@ public class TestReportDAO {
 	public List<TestReport> viewAllTestReports() {
 		List<TestReport> reports = new ArrayList<>();
 		String patient_name = "", test_name = "";
+		float price = 0;
 		try {
 			connection = getConnection();
 			statement = connection.createStatement();
@@ -137,11 +138,49 @@ public class TestReportDAO {
 						patient_name = rs2.getString("name");
 					}
 				}
-				ResultSet rs3 = statement.executeQuery("SELECT name from tests WHERE id = " + test_id);
+				ResultSet rs3 = statement.executeQuery("SELECT name, price from tests WHERE id = " + test_id);
 				while (rs3.next()) {
 					test_name = rs3.getString("name");
+					price = rs3.getInt("price");
 				}
-				reports.add(new TestReport(id, checkin_id, patient_name, test_id, test_name, result));
+				reports.add(new TestReport(id, checkin_id, patient_name, test_id, test_name, price, result));
+			}
+
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+
+		return reports;
+
+	}
+	
+	public List<TestReport> viewTestReports(int t_id) {
+		List<TestReport> reports = new ArrayList<>();
+		String patient_name = "", test_name = "";
+		float price = 0;
+		try {
+			connection = getConnection();
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * from test_reports WHERE id = " + t_id);
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int checkin_id = rs.getInt("checkin_id");
+				int test_id = rs.getInt("test_id");
+				String result = rs.getString("result");
+				ResultSet rs1 = statement.executeQuery("SELECT patient_id from checkins WHERE id = " + checkin_id);
+				while (rs1.next()) {
+					int patient_id = rs1.getInt("patient_id");
+					ResultSet rs2 = statement.executeQuery("SELECT name from patients WHERE id = " + patient_id);
+					while (rs2.next()) {
+						patient_name = rs2.getString("name");
+					}
+				}
+				ResultSet rs3 = statement.executeQuery("SELECT name, price from tests WHERE id = " + test_id);
+				while (rs3.next()) {
+					test_name = rs3.getString("name");
+					price = rs3.getInt("price");
+				}
+				reports.add(new TestReport(id, checkin_id, patient_name, test_id, test_name, price, result));
 			}
 
 		} catch (Throwable oops) {
@@ -164,6 +203,48 @@ public class TestReportDAO {
 				statement = connection.createStatement();
 				ResultSet rs = statement
 						.executeQuery("SELECT id, checkin_id, test_id, result FROM test_reports where id =" + id + "");
+
+				while (rs.next()) {
+					int checkin_id = rs.getInt("checkin_id");
+					int test_id = rs.getInt("test_id");
+					String result = rs.getString("result");
+					ResultSet rs1 = statement.executeQuery("SELECT patient_id from checkins WHERE id = " + checkin_id);
+					while (rs1.next()) {
+						int patient_id = rs1.getInt("patient_id");
+						ResultSet rs2 = statement.executeQuery("SELECT name from patients WHERE id = " + patient_id);
+						while (rs2.next()) {
+							patient_name = rs2.getString("name");
+						}
+					}
+					ResultSet rs3 = statement.executeQuery("SELECT name from tests WHERE id = " + test_id);
+					while (rs3.next()) {
+						test_name = rs3.getString("name");
+					}
+					report = new TestReport(id, checkin_id, patient_name, test_id, test_name, result);
+				}
+			} finally {
+				close(result);
+				close(statement);
+				close(connection);
+			}
+		} catch (Throwable oops) {
+			oops.printStackTrace();
+		}
+		return report;
+	}
+	
+	public TestReport selectPatientTestReport(int id) {
+		TestReport report = null;
+		String patient_name = "", test_name = "";
+
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+
+			try {
+				connection = DriverManager.getConnection(jdbcURL, user, password);
+				statement = connection.createStatement();
+				ResultSet rs = statement
+						.executeQuery("SELECT id, checkin_id, test_id, result FROM test_reports where checkin_id =" + id + "");
 
 				while (rs.next()) {
 					int checkin_id = rs.getInt("checkin_id");
