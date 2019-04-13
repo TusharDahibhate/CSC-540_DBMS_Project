@@ -10,11 +10,13 @@
 	<center>
 		<h1>Patient Management</h1>
 		<h2>
-			<form action="patient-form.jsp" method="get" enctype="multipart/form-data">
+			<form action="patient-form.jsp" method="get"
+				enctype="multipart/form-data">
 				<button type="submit" name="button" value="create">ADD</button>
 			</form>
 
-			<form action="PatientServlet" method="get" enctype="multipart/form-data">
+			<form action="PatientServlet" method="get"
+				enctype="multipart/form-data">
 				<button type="submit" name="button" value="list">LIST</button>
 				<input type="hidden" name="operation" value="list" />
 			</form>
@@ -62,6 +64,17 @@
 								type="hidden" name="id" value='${pat.id}' />
 						</form>
 					</td>
+					<form action="PatientServlet" method="get"
+						enctype="multipart/form-data">
+					<td>
+						<button type="submit" name="button" value="MEDICAL_HISTORY">MEDICAL
+							HISTORY</button> <input type="hidden" name="operation"
+						value="medical_history" /> <input type="hidden" name="id"
+						value='${pat.id}' />
+					</td>
+					<td><input type="date" name="start" /></td>
+					<td><input type="date" name="end" /></td>
+					</form>
 				</tr>
 			</c:forEach>
 		</table>

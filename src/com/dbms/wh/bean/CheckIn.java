@@ -11,6 +11,15 @@ public class CheckIn {
 	private Date startdate;
 	private Date enddate;
 
+	public CheckIn(int id, int patientid, int staffid, Date startdate, Date enddate) {
+		super();
+		this.id = id;
+		this.patientid = patientid;
+		this.staffid = staffid;
+		this.startdate = startdate;
+		this.enddate = enddate;
+	}
+
 	public CheckIn(int patient_id, int staff_id, Date start_date, Date end_date) {
 		this.patientid = patient_id;
 		this.staffid = staff_id;

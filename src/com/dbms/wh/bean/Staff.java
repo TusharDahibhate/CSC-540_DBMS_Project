@@ -12,8 +12,9 @@ public class Staff {
 	private String professionaltitle;
 	private String address;
 	private String department;
-	
-	public Staff(String name, Integer age, String gender, String jobtitle, String professionaltitle, Integer phoneno, String address, String department) {
+
+	public Staff(String name, Integer age, String gender, String jobtitle, String professionaltitle, Integer phoneno,
+			String address, String department) {
 		this.name = name;
 		this.age = age;
 		this.gender = gender;
@@ -24,10 +25,25 @@ public class Staff {
 		this.department = department;
 	}
 
+	public Staff(int id, Integer age, Integer phoneno, String name, String gender, String jobtitle,
+			String professionaltitle, String address, String department) {
+		super();
+		this.id = id;
+		this.age = age;
+		this.phoneno = phoneno;
+		this.name = name;
+		this.gender = gender;
+		this.jobtitle = jobtitle;
+		this.professionaltitle = professionaltitle;
+		this.address = address;
+		this.department = department;
+	}
+
 	@Override
 	public String toString() {
 		return "Staff [id=" + id + ", age=" + age + ", name=" + name + ", gender=" + gender + ", phoneno=" + phoneno
-				+ ", jobtitle=" + jobtitle + ", professionaltitle=" + professionaltitle + ", address=" + address + ",department=" + department + "]";
+				+ ", jobtitle=" + jobtitle + ", professionaltitle=" + professionaltitle + ", address=" + address
+				+ ",department=" + department + "]";
 	}
 
 	public int getId() {
@@ -93,7 +109,7 @@ public class Staff {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public String getDepartment() {
 		return department;
 	}
@@ -101,5 +117,5 @@ public class Staff {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-	
+
 }

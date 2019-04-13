@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.wh.bean.Bed;
+import com.dbms.wh.bean.CheckIn;
+import com.dbms.wh.bean.MedicalHistory;
 import com.dbms.wh.bean.Patient;
 import com.dbms.wh.dao.PatientDAO;
 
@@ -82,6 +85,20 @@ public class PatientServlet extends HttpServlet {
 				//System.out.println("No of patients: " + patients.size());
 				RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 				dispatcher.forward(request, response);
+			} else if(operation.equals("medical_history")) {				
+				int id = Integer.parseInt(request.getParameter("id"));	
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date startDate = null, endDate = null;
+				startDate = request.getParameter("start") != "" ? format.parse(request.getParameter("start"))
+						: null;
+				endDate = request.getParameter("end") != "" ? format.parse(request.getParameter("end"))
+						: null;
+				
+				List<MedicalHistory> history = new ArrayList<>();
+				history = patientdao.getMedicalHistory(id, startDate, endDate);
+				request.setAttribute("history", history);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("patient-history.jsp");
+				dispatcher.forward(request, response);				
 			}
 			
 		} catch (Exception e) {
