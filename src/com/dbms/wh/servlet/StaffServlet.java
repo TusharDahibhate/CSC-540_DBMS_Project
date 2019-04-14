@@ -100,7 +100,7 @@ public class StaffServlet extends HttpServlet {
 	private void insertStaff(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
 		Staff newStaff = new Staff(request.getParameter("name"), Integer.parseInt(request.getParameter("age")),
 				request.getParameter("gender"), request.getParameter("job_title"),
-				request.getParameter("professional_title"), Integer.parseInt(request.getParameter("phone_no")),
+				request.getParameter("professional_title"), request.getParameter("phone_no"),
 				request.getParameter("address"), request.getParameter("department"));
 		staffdao.insertStaff(newStaff);
 		response.sendRedirect("StaffServlet");
@@ -110,7 +110,7 @@ public class StaffServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Staff staff = new Staff(request.getParameter("name"), Integer.parseInt(request.getParameter("age")),
 				request.getParameter("gender"), request.getParameter("job_title"),
-				request.getParameter("professional_title"), Integer.parseInt(request.getParameter("phone_no")),
+				request.getParameter("professional_title"), request.getParameter("phone_no"),
 				request.getParameter("address"), request.getParameter("department"));
 		staff.setId(id);
 		staffdao.updateStaff(staff);

@@ -57,7 +57,7 @@ public class StaffDAO {
 			preparedStatement.setString(3, staff.getGender());
 			preparedStatement.setString(4, staff.getJobtitle());
 			preparedStatement.setString(5, staff.getProfessionaltitle());
-			preparedStatement.setInt(6, staff.getPhoneno());
+			preparedStatement.setString(6, staff.getPhoneno());
 			preparedStatement.setString(7, staff.getAddress());
 			preparedStatement.setString(8, staff.getDepartment());
 			
@@ -79,7 +79,7 @@ public class StaffDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				staff = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				staff = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getString("phone_no"), rs.getString("address"), rs.getString("department"));
 				staff.setId(id);
 			}
 		} catch (SQLException e) {
@@ -98,7 +98,7 @@ public class StaffDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 			Staff s;
 			while (rs.next()) {
-				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getString("phone_no"), rs.getString("address"), rs.getString("department"));
 				s.setId(rs.getInt("id"));
 				staff.add(s);
 			}
@@ -125,13 +125,13 @@ public class StaffDAO {
 				if(count != 0) {
 					if(prevRole.equals(rs.getString("job_title")) == false) {
 						Staff x; // dummy value
-						x = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+						x = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getString("phone_no"), rs.getString("address"), rs.getString("department"));
 						x.setId(-1);
 						staff.add(x);
 					}
 				}
 				prevRole = rs.getString("job_title");
-				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getString("phone_no"), rs.getString("address"), rs.getString("department"));
 				s.setId(rs.getInt("id"));
 				staff.add(s);
 			}
@@ -179,7 +179,7 @@ public class StaffDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 			Staff s;
 			while (rs.next()) {
-				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getString("phone_no"), rs.getString("address"), rs.getString("department"));
 				s.setId(rs.getInt("id"));
 				staff.add(s);
 			}
@@ -199,7 +199,7 @@ public class StaffDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 			Staff s;
 			while (rs.next()) {
-				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getInt("phone_no"), rs.getString("address"), rs.getString("department"));
+				s = new Staff(rs.getString("name"), rs.getInt("age"), rs.getString("gender"), rs.getString("job_title"), rs.getString("professional_title"), rs.getString("phone_no"), rs.getString("address"), rs.getString("department"));
 				s.setId(rs.getInt("id"));
 				staff.add(s);
 			}
@@ -228,7 +228,7 @@ public class StaffDAO {
 			preparedStatement.setString(3, staff.getGender());
 			preparedStatement.setString(4, staff.getJobtitle());
 			preparedStatement.setString(5, staff.getProfessionaltitle());
-			preparedStatement.setInt(6, staff.getPhoneno());
+			preparedStatement.setString(6, staff.getPhoneno());
 			preparedStatement.setString(7, staff.getAddress());
 			preparedStatement.setString(8, staff.getDepartment());
 			preparedStatement.setInt(9, staff.getId());

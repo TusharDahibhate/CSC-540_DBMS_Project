@@ -5,7 +5,7 @@ public class Staff {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private Integer age;
-	private Integer phoneno;
+	private String phoneno;
 	private String name;
 	private String gender;
 	private String jobtitle;
@@ -13,7 +13,7 @@ public class Staff {
 	private String address;
 	private String department;
 
-	public Staff(String name, Integer age, String gender, String jobtitle, String professionaltitle, Integer phoneno,
+	public Staff(String name, Integer age, String gender, String jobtitle, String professionaltitle, String phoneno,
 			String address, String department) {
 		this.name = name;
 		this.age = age;
@@ -25,7 +25,7 @@ public class Staff {
 		this.department = department;
 	}
 
-	public Staff(int id, Integer age, Integer phoneno, String name, String gender, String jobtitle,
+	public Staff(int id, Integer age, String phoneno, String name, String gender, String jobtitle,
 			String professionaltitle, String address, String department) {
 		super();
 		this.id = id;
@@ -78,11 +78,11 @@ public class Staff {
 		this.jobtitle = jobtitle;
 	}
 
-	public Integer getPhoneno() {
+	public String getPhoneno() {
 		return phoneno;
 	}
 
-	public void setPhoneno(Integer phoneno) {
+	public void setPhoneno(String phoneno) {
 		this.phoneno = phoneno;
 	}
 

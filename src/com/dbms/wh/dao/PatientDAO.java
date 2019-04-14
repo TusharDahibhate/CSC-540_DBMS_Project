@@ -191,7 +191,7 @@ public class PatientDAO {
 						rs.getDate("p.dob"), rs.getString("p.address"));
 				MedicalRecord record = new MedicalRecord(rs.getInt("m.id"), rs.getString("m.diagnosis_details"),
 						rs.getInt("m.checkin_id"), rs.getInt("m.staff_id"));
-				Staff staff = new Staff(rs.getInt("s.id"), rs.getInt("s.age"), rs.getInt("s.phone_no"),
+				Staff staff = new Staff(rs.getInt("s.id"), rs.getInt("s.age"), rs.getString("s.phone_no"),
 						rs.getString("s.name"), rs.getString("s.gender"), rs.getString("s.job_title"),
 						rs.getString("s.professional_title"), rs.getString("s.address"), rs.getString("s.department"));
 				MedicalHistory h = new MedicalHistory(checkin, record, patient, staff);
