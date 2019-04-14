@@ -128,7 +128,7 @@ public class CheckInServlet extends HttpServlet {
 		Date startDate = null, endDate = null;
 		try {
 			startDate = format.parse(request.getParameter("start_date"));
-			endDate = request.getParameter("end_date") != null ? format.parse(request.getParameter("end_date"))
+			endDate = request.getParameter("end_date") != "" ? format.parse(request.getParameter("end_date"))
 					: null;
 
 			CheckIn checkin = new CheckIn(Integer.parseInt(request.getParameter("patient_id")),

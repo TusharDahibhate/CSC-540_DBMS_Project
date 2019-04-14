@@ -45,12 +45,12 @@
         </tr>
         <tr>
             <th>Age</th>
-            <td><input class="form-control" type="number" name="age" required size="45"
+            <td><input class="form-control" type="number" name="age" size="45"
                 value="<c:out value='${staff.age}' />" /></td>
         </tr>
         <tr>
             <th>Gender</th>
-            <td><input class="form-control" type="text" name="gender" required size="45"
+            <td><input class="form-control" type="text" name="gender" size="45"
                 value="<c:out value='${staff.gender}' />" /></td>
         </tr>
         <tr>
@@ -60,22 +60,22 @@
         </tr>
         <tr>
             <th>Professional Title</th>
-            <td><input class="form-control" type="text" name="professional_title" required size="45"
+            <td><input class="form-control" type="text" name="professional_title" size="45"
                 value="<c:out value='${staff.professionaltitle}' />" /></td>
         </tr>
         <tr>
             <th>Phone</th>
-            <td><input class="form-control" type="text" name=phone_no required size="45"
+            <td><input class="form-control" type="text" name=phone_no size="45"
                 value="<c:out value='${staff.phoneno}' />" /></td>
         </tr>
         <tr>
             <th>Address</th>
-            <td><input class="form-control" type="text" name="address" required size="45"
+            <td><input class="form-control" type="text" name="address" size="45"
                 value="<c:out value='${staff.address}' />" /></td>
         </tr>
         <tr>
             <th>Department</th>
-            <td><input class="form-control" type="text" name="department" required size="45"
+            <td><input class="form-control" type="text" name="department" size="45"
                 value="<c:out value='${staff.department}' />" /></td>
         </tr>
         <tr>
