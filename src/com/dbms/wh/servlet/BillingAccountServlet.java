@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dbms.wh.bean.BillingAccount;
 import com.dbms.wh.dao.BillingAccountDAO;
+import com.dbms.wh.dao.TransactionDAO;
 
 @WebServlet("/BillingAccountServlet")
 public class BillingAccountServlet extends HttpServlet {
@@ -71,6 +72,14 @@ public class BillingAccountServlet extends HttpServlet {
 				request.setAttribute("billingaccounts", billingaccounts);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("billingaccount-list.jsp");
 				dispatcher.forward(request, response);
+			}
+			
+			else if(operation.equals("testTransaction")) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				BillingAccount existingBillingAccount = billingaccountdao.selectBillingAccount(id);
+				TransactionDAO tdao = new TransactionDAO();
+				tdao.testTransaction(existingBillingAccount);
+				response.sendRedirect("BillingAccountServlet");
 			}
 			
 		} catch (Exception e) {

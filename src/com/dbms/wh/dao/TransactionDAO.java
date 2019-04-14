@@ -15,7 +15,7 @@ public class TransactionDAO {
 	Statement statement = null;
 	ResultSet result = null;
 	
-	public void updateBillingAccount(BillingAccount billingaccount) {
+	public void testTransaction(BillingAccount billingaccount) {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			try {
@@ -31,10 +31,12 @@ public class TransactionDAO {
 					+ ", paid_by_person = " + paid_by_person + ", paid_by_insurance = " + billingaccount.getPaid_by_insurance() + ", payment_info = '"
 					+ billingaccount.getPayment_info() + "', payee_ssn = " + billingaccount.getPayee_ssn() + ", billing_address = '"
 					+ billingaccount.getBilling_address() + "', total_charge = "+ billingaccount.getTotal_charge() +"  WHERE id = " + billingaccount.getId() + ";");
-					paid_by_person += installment;
+					
 					if(i == 3) {
 						connection.commit();
+						System.out.println("Committed at: " + paid_by_person);
 					}
+					paid_by_person += installment;
 					if(i == 9) {
 						throw new Exception("Invalid Credit Card");
 					}
@@ -48,6 +50,7 @@ public class TransactionDAO {
 			} catch (Exception e) {
 				System.out.println("Exception: " + e + " \n aborting transaction. Initiating Rollback!");
 				connection.rollback();
+				System.out.println("Rollback done.");
 				close(result);
 				close(statement);
 				close(connection);

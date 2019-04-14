@@ -69,7 +69,7 @@
                             <input type="hidden" name="ward_id" value='${bed.wardId}' />
                         </form>
                        </td>
-                   </c:if>
+                </c:if>
 			</tr>
 		</c:forEach>
 	</table>

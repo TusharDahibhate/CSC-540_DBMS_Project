@@ -64,6 +64,14 @@
 								type="hidden" name="id" value='${bac.id}' />
 						</form>
 					</td>
+					<td>
+                        <form action="BillingAccountServlet" method="get"
+                            enctype="multipart/form-data">
+                            <button type="submit" name="button" value="submit">Test Transaction</button>
+                            <input type="hidden" name="operation" value="testTransaction" /> <input
+                                type="hidden" name="id" value='${bac.id}' />
+                        </form>
+                    </td>
 				</tr>
 			</c:forEach>
 		</table>
