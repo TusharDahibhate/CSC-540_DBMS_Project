@@ -96,6 +96,7 @@ public class CheckoutServlet extends HttpServlet {
 		request.setAttribute("pBill", pBill);
 		request.setAttribute("tBill", tBill);
 		request.setAttribute("bBill", bBill);
+		request.setAttribute("regFee", regFee);
 		
 		request.setAttribute("total", tBill + pBill + bBill + regFee);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("checkout-done.jsp");
