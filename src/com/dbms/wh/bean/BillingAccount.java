@@ -7,12 +7,12 @@ public class BillingAccount {
 	private int paid_by_person;
 	private int paid_by_insurance;
 	private String payment_info;
-	private int payee_ssn;
+	private String payee_ssn;
 	private String billing_address;
 	private int total_charge;
 	
 	public BillingAccount(int staff_id, int checkin_id, int paid_by_person, int paid_by_insurance, String payment_info,
-			int payee_ssn, String billing_address, int total_charge) {
+			String payee_ssn, String billing_address, int total_charge) {
 		super();
 		this.staff_id = staff_id;
 		this.checkin_id = checkin_id;
@@ -25,7 +25,7 @@ public class BillingAccount {
 	}
 	
 	public BillingAccount(int id, int staff_id, int checkin_id, int paid_by_person, int paid_by_insurance,
-			String payment_info, int payee_ssn, String billing_address, int total_charge) {
+			String payment_info, String payee_ssn, String billing_address, int total_charge) {
 		super();
 		this.id = id;
 		this.staff_id = staff_id;
@@ -94,11 +94,11 @@ public class BillingAccount {
 		this.payment_info = payment_info;
 	}
 
-	public int getPayee_ssn() {
+	public String getPayee_ssn() {
 		return payee_ssn;
 	}
 
-	public void setPayee_ssn(int payee_ssn) {
+	public void setPayee_ssn(String payee_ssn) {
 		this.payee_ssn = payee_ssn;
 	}
 

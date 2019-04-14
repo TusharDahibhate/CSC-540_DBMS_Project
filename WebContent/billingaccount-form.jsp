@@ -67,17 +67,17 @@
 			</tr>
 			<tr>
 				<th>Payment Info:</th>
-				<td><input type="text" name="payment_info" size="15"
+				<td><input type="text" name="payment_info"
 					value="<c:out value='${billingaccounts.payment_info}' />" /></td>
 			</tr>
 			<tr>
 				<th>Payee SSN:</th>
-				<td><input type="number" name="payee_ssn" size="15"
+				<td><input type="text" name="payee_ssn"
 					value="<c:out value='${billingaccounts.payee_ssn}' />" /></td>
 			</tr>
 			<tr>
 				<th>Billing Address:</th>
-				<td><input type="text" name="billing_address" size="15"
+				<td><input type="text" name="billing_address"
 					value="<c:out value='${billingaccounts.billing_address}' />" /></td>
 			</tr>
 			<tr>

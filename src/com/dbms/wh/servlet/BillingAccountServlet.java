@@ -36,7 +36,7 @@ public class BillingAccountServlet extends HttpServlet {
 				operation = request.getParameter("operation");
 			
 			if(operation.equals("create")) {
-				BillingAccount billingaccount = new BillingAccount(Integer.parseInt(request.getParameter("staff_id")), Integer.parseInt(request.getParameter("checkin_id")), Integer.parseInt(request.getParameter("paid_by_person")), Integer.parseInt(request.getParameter("paid_by_insurance")), request.getParameter("payment_info"), Integer.parseInt(request.getParameter("payee_ssn")), request.getParameter("billing_address"), Integer.parseInt(request.getParameter("total_charge")));
+				BillingAccount billingaccount = new BillingAccount(Integer.parseInt(request.getParameter("staff_id")), Integer.parseInt(request.getParameter("checkin_id")), Integer.parseInt(request.getParameter("paid_by_person")), Integer.parseInt(request.getParameter("paid_by_insurance")), request.getParameter("payment_info"), request.getParameter("payee_ssn"), request.getParameter("billing_address"), Integer.parseInt(request.getParameter("total_charge")));
 				billingaccountdao.createBillingAccount(billingaccount);
 				List<BillingAccount> billingaccounts = billingaccountdao.selectAllAccounts();
 				request.setAttribute("billingaccounts", billingaccounts);
@@ -45,7 +45,7 @@ public class BillingAccountServlet extends HttpServlet {
 				
 			}
 			else if (operation.equals("modify")) {
-				BillingAccount billingaccount = new BillingAccount(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("staff_id")), Integer.parseInt(request.getParameter("checkin_id")), Integer.parseInt(request.getParameter("paid_by_person")), Integer.parseInt(request.getParameter("paid_by_insurance")), request.getParameter("payment_info"), Integer.parseInt(request.getParameter("payee_ssn")), request.getParameter("billing_address"), Integer.parseInt(request.getParameter("total_charge")));
+				BillingAccount billingaccount = new BillingAccount(Integer.parseInt(request.getParameter("id")), Integer.parseInt(request.getParameter("staff_id")), Integer.parseInt(request.getParameter("checkin_id")), Integer.parseInt(request.getParameter("paid_by_person")), Integer.parseInt(request.getParameter("paid_by_insurance")), request.getParameter("payment_info"), request.getParameter("payee_ssn"), request.getParameter("billing_address"), Integer.parseInt(request.getParameter("total_charge")));
 				billingaccountdao.updateBillingAccount(billingaccount);
 				List<BillingAccount> billingaccounts = billingaccountdao.selectAllAccounts();
 				request.setAttribute("billingaccounts", billingaccounts);

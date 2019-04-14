@@ -25,7 +25,7 @@ public class BillingAccountDAO {
 				statement = connection.createStatement();
 				statement.executeUpdate("INSERT INTO billing_accounts (staff_id, checkin_id, paid_by_person, paid_by_insurance, payment_info, payee_ssn, billing_address, total_charge) VALUES"
 						+ "(" + billingaccount.getStaff_id() + "," + billingaccount.getCheckin_id() + "," + billingaccount.getPaid_by_person() + ","
-						+ billingaccount.getPaid_by_insurance() + ",'" + billingaccount.getPayment_info() + "'," + billingaccount.getPayee_ssn() + ",'"
+						+ billingaccount.getPaid_by_insurance() + ",'" + billingaccount.getPayment_info() + "','" + billingaccount.getPayee_ssn() + "','"
 						+ billingaccount.getBilling_address() + "',"+ billingaccount.getTotal_charge() +")");
 				System.out.println("New Billing Account added successfully!");
 			} finally {
@@ -53,7 +53,7 @@ public class BillingAccountDAO {
 					int paid_by_person = rs.getInt("paid_by_person");
 					int paid_by_insurance = rs.getInt("paid_by_insurance");
 					String payment_info = rs.getString("payment_info");
-					int payee_ssn = rs.getInt("payee_ssn");
+					String payee_ssn = rs.getString("payee_ssn");
 					String billing_address = rs.getString("billing_address");
 					int total_charge = rs.getInt("total_charge");
 					billingaccount = new BillingAccount(id, staff_id, checkin_id, paid_by_person, paid_by_insurance, payment_info, payee_ssn, billing_address, total_charge);
@@ -78,7 +78,7 @@ public class BillingAccountDAO {
 				statement = connection.createStatement();
 				statement.executeUpdate("UPDATE billing_accounts SET staff_id = " + billingaccount.getStaff_id() + ", checkin_id = " + billingaccount.getCheckin_id()
 						+ ", paid_by_person = " + billingaccount.getPaid_by_person() + ", paid_by_insurance = " + billingaccount.getPaid_by_insurance() + ", payment_info = '"
-						+ billingaccount.getPayment_info() + "', payee_ssn = " + billingaccount.getPayee_ssn() + ", billing_address = '"
+						+ billingaccount.getPayment_info() + "', payee_ssn = '" + billingaccount.getPayee_ssn() + "', billing_address = '"
 						+ billingaccount.getBilling_address() + "', total_charge = "+ billingaccount.getTotal_charge() +"  WHERE id = " + billingaccount.getId() + ";");
 				System.out.println("Billing Account updated successfully!");
 			} finally {
@@ -107,7 +107,7 @@ public class BillingAccountDAO {
 				int paid_by_person = rs.getInt("paid_by_person");
 				int paid_by_insurance = rs.getInt("paid_by_insurance");
 				String payment_info = rs.getString("payment_info");
-				int payee_ssn = rs.getInt("payee_ssn");
+				String payee_ssn = rs.getString("payee_ssn");
 				String billing_address = rs.getString("billing_address");
 				int total_charge = rs.getInt("total_charge");
 				billingaccounts.add(new BillingAccount(id, staff_id, checkin_id, paid_by_person, paid_by_insurance, payment_info, payee_ssn, billing_address, total_charge));
