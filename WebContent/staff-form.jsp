@@ -65,7 +65,7 @@
         </tr>
         <tr>
             <th>Phone</th>
-            <td><input class="form-control" type="number" name=phone_no required size="45"
+            <td><input class="form-control" type="text" name=phone_no required size="45"
                 value="<c:out value='${staff.phoneno}' />" /></td>
         </tr>
         <tr>
