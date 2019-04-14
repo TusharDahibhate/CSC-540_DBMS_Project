@@ -29,7 +29,7 @@ import com.dbms.wh.dao.TestReportDAO;
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static final int regFee = 100;
 	public CheckoutServlet() {
 		super();
 	}
@@ -96,7 +96,8 @@ public class CheckoutServlet extends HttpServlet {
 		request.setAttribute("pBill", pBill);
 		request.setAttribute("tBill", tBill);
 		request.setAttribute("bBill", bBill);
-		request.setAttribute("total", tBill + pBill + bBill);
+		
+		request.setAttribute("total", tBill + pBill + bBill + regFee);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("checkout-done.jsp");
 		dispatcher.forward(request, response);
 	}
