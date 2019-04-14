@@ -60,6 +60,16 @@
 
 						</form>
 					</td>
+					
+					<td>
+                        <form action="PrescriptionServlet" method="get"
+                            enctype="multipart/form-data">
+                            <button type="submit" name="button" value="submit">Test Transaction</button>
+                            <input type="hidden" name="operation" value="testTransaction" /> <input
+                                type="hidden" name="id" value='${prescription.id}' />
+
+                        </form>
+                    </td>
 				</tr>
 			</c:forEach>
 		</table>

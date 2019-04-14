@@ -78,7 +78,7 @@ public class BillingAccountServlet extends HttpServlet {
 				int id = Integer.parseInt(request.getParameter("id"));
 				BillingAccount existingBillingAccount = billingaccountdao.selectBillingAccount(id);
 				TransactionDAO tdao = new TransactionDAO();
-				tdao.testTransaction(existingBillingAccount);
+				tdao.testBillingTransaction(existingBillingAccount);
 				response.sendRedirect("BillingAccountServlet");
 			}
 			

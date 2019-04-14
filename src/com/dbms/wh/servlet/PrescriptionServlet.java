@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dbms.wh.bean.BillingAccount;
 import com.dbms.wh.bean.Prescription;
 import com.dbms.wh.dao.PrescriptionDAO;
+import com.dbms.wh.dao.TransactionDAO;
 
 @WebServlet("/PrescriptionServlet")
 public class PrescriptionServlet extends HttpServlet {
@@ -58,6 +60,13 @@ public class PrescriptionServlet extends HttpServlet {
 				break;
 			case "LIST":
 				listPrescriptions(request, response);
+				break;
+			case "testTransaction":
+				int id = Integer.parseInt(request.getParameter("id"));
+				Prescription existingPrescription = prescriptionDAO.selectPrescription(id);
+				TransactionDAO tdao = new TransactionDAO();
+				tdao.testPrescriptionTransaction(existingPrescription);
+				response.sendRedirect("PrescriptionServlet");
 				break;
 			}
 		} catch (SQLException ex) {
