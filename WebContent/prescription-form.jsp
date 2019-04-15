@@ -12,6 +12,9 @@
 </head>
 <body>
 	<div style="text-align: center">
+	<form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
 		<h2>Prescription Management</h2>
 		<form action="PrescriptionServlet" method="get"
 			enctype="multipart/form-data">

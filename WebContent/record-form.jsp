@@ -26,6 +26,10 @@
 				<input type="submit" class="button" value="LIST"> <input
 					type="hidden" name="operation" value="list" />
 			</form>
+			
+			<form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
 
 		</h2>
 	</center>

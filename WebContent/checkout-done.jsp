@@ -11,6 +11,9 @@
 	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
+<form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
 	<div>The assigned bed has be released.</div>
 	<div>Registration fee was "${regFee}" dollars.</div>
 	<div>Prescription bill: "${pBill}" dollars</div>

@@ -14,7 +14,9 @@
 	<center>
 		<h2>Medical History</h2>
 	</center>
-
+	<div><form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	</div>
 	<div align="center">
 		<table border="1" cellpadding="5">			
 			<tr>				

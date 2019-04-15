@@ -22,6 +22,10 @@
 			<input type="submit" class="button" value="LIST"> <input
 				type="hidden" name="operation" value="LIST" />
 		</form>
+		
+		<form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
 	</div>
 	<div align="center">
 		<c:if test="${ward != null}">

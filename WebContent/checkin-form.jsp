@@ -20,6 +20,10 @@
              <input type="submit" class="button" value="List all">
              <input type="hidden" name="operation" value="LIST" />
          </form>
+         
+         <form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
     </div>
     
     <c:if test="${checkin != null}">

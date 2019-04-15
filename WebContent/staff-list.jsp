@@ -25,6 +25,10 @@
              <input type="submit" class="button" value="Show Stats">
              <input type="hidden" name="operation" value="STATS" />
          </form>
+         
+         <form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
     </div>
 
     <table border="1" cellpadding="5">

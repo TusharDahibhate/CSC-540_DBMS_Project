@@ -19,6 +19,10 @@
 			<input type="submit" class="button" value="List all"> <input
 				type="hidden" name="operation" value="list" />
 		</form>
+		
+		<form action="homepage.jsp" method="get" enctype="multipart/form-data">
+			<input type="submit" class="button" value="HOME">
+		</form>	
 
 		<div align="center">
 			<c:if test="${billingaccounts != null}">
