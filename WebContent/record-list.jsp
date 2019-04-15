@@ -21,7 +21,7 @@
 
 			<form action="MedicalRecordServlet" method="get"
 				enctype="multipart/form-data">
-				<button type="submit" name="button" value="list">LIST</button>
+				<input type="submit" class="button" value="LIST">
 				<input type="hidden" name="operation" value="list" />
 			</form>
 
@@ -52,7 +52,7 @@
 					<td>
 						<form action="MedicalRecordServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<button type="submit" name="button" value="EDIT"><a>EDIT</a></button>
 							<input type="hidden" name="operation" value="update" /> <input
 								type="hidden" name="id" value='${rec.id}' />
 						</form>
@@ -60,7 +60,7 @@
 					<td>
 						<form action="MedicalRecordServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<button type="submit" name="button" value="DELETE"><a>DELETE</a></button>
 							<input type="hidden" name="operation" value="delete" /> <input
 								type="hidden" name="id" value='${rec.id}' />
 						</form>
