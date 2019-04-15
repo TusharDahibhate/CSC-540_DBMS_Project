@@ -55,6 +55,7 @@
 							type="hidden" name="ward_id" value='${bed.wardId}' />
 					</form>
 				</td>
+				<c:if test="${bed.checkinId == 0}">
 				<td>
 					<form action="BedServlet" method="get"
 						enctype="multipart/form-data">
@@ -64,7 +65,7 @@
 							type="hidden" name="ward_id" value='${bed.wardId}' />
 					</form>
 				</td>
-				<c:if test="${bed.checkinId == 0}">
+				
 				   <td>
 					   <form action="BedServlet" method="get" enctype="multipart/form-data">
                             <button type="submit" name="button" value="Assign"><a>Assign</a></button>
