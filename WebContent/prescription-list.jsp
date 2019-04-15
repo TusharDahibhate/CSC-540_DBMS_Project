@@ -3,26 +3,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>PRESCRIPTION MANAGEMENT</title>
+<meta charset="ISO-8859-1">
+<title>Prescription Management</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
-	<center>
-		<h1>Prescription Management</h1>
-		<h2>
-			<form action="PrescriptionServlet" method="get"
-				enctype="multipart/form-data">
-				<button type="submit" name="button" value="ADD">ADD</button>
-				<input type="hidden" name="operation" value="ADD" />
-			</form>
+	<div style="text-align: center">
+		<h2>Prescription List</h2>
+		<form action="PrescriptionServlet" method="get"
+			enctype="multipart/form-data">
+			<input type="submit" class="button" value="ADD">
+			<input type="hidden" name="operation" value="ADD" />
+		</form>
 
-			<form action="PrescriptionServlet" method="get"
-				enctype="multipart/form-data">
-				<button type="submit" name="button" value="LIST">LIST</button>
-				<input type="hidden" name="operation" value="LIST" />
-			</form>
-
-		</h2>
-	</center>
+		<form action="PrescriptionServlet" method="get"
+			enctype="multipart/form-data">
+			<input type="submit" class="button" value="LIST">
+			<input type="hidden" name="operation" value="LIST" />
+		</form>
+	</div>
 
 	<div align="center">
 		<table border="1" cellpadding="5">
@@ -34,8 +36,9 @@
 				<th>Quantity</th>
 				<th>Medication Id</th>
 				<th>Record Id</th>
-
-				<th>Actions</th>
+				<th>Edit</th>
+				<th>Delete</th>
+				<th>Transactions</th>
 			</tr>
 			<c:forEach var="prescription" items="${listPrescription}">
 				<tr>
@@ -46,7 +49,7 @@
 					<td>
 						<form action="PrescriptionServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<button type="submit" name="button" value="EDIT"><a>EDIT</a></button>
 							<input type="hidden" name="operation" value="EDIT" /> <input
 								type="hidden" name="id" value='${prescription.id}' />
 						</form>
@@ -54,22 +57,23 @@
 					<td>
 						<form action="PrescriptionServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<button type="submit" name="button" value="DELETE"><a>DELETE</a></button>
 							<input type="hidden" name="operation" value="DELETE" /> <input
 								type="hidden" name="id" value='${prescription.id}' />
 
 						</form>
 					</td>
-					
-					<td>
-                        <form action="PrescriptionServlet" method="get"
-                            enctype="multipart/form-data">
-                            <button type="submit" name="button" value="submit">Test Transaction</button>
-                            <input type="hidden" name="operation" value="testTransaction" /> <input
-                                type="hidden" name="id" value='${prescription.id}' />
 
-                        </form>
-                    </td>
+					<td>
+						<form action="PrescriptionServlet" method="get"
+							enctype="multipart/form-data">
+							<button type="submit" name="button" value="submit"><a>Test
+								Transaction</a></button>
+							<input type="hidden" name="operation" value="testTransaction" />
+							<input type="hidden" name="id" value='${prescription.id}' />
+
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
