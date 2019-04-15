@@ -5,17 +5,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Patient Management</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
-		<h1>Medical History</h1>
+		<h2>Medical History</h2>
 	</center>
 
 	<div align="center">
-		<table border="1" cellpadding="5">
-			<caption>
-				<h2>Medical History</h2>
-			</caption>
+		<table border="1" cellpadding="5">			
 			<tr>				
 				<th>Age</th>
 				<th>Name</th>				
