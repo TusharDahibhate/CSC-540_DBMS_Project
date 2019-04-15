@@ -84,7 +84,7 @@
 	
 	<c:if test="${usgpercentward != null}">
         <c:forEach var="type" items="${usgpercentward}">
-		   Ward ID: ${type.key} is ${type.value} % occupied <br/>
+		   Ward ID: ${type.key} is ${type.value} % available. <br/>
 		</c:forEach>
         </div>
     </c:if>
