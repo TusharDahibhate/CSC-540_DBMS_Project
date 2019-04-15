@@ -50,22 +50,14 @@
 					value="<c:out value='${patient.id}' />" />
 			</c:if>
 
-			<c:if test="${patient == null}">
-				<tr>
-					<th>Patient id</th>
-					<td><input type="number" name="id" size="45"
-						value="<c:out value='${patient.id}' />" /></td>
-				</tr>
-			</c:if>
-
 			<tr>
 				<th>Age</th>
-				<td><input type="number" name="age" size="45"
+				<td><input type="number" name="age" required size="45"
 					value="<c:out value='${patient.age}' />" /></td>
 			</tr>
 			<tr>
 				<th>Name:</th>
-				<td><input type="text" name="name" size="15"
+				<td><input type="text" name="name" required size="15"
 					value="<c:out value='${patient.name}' />" /></td>
 			</tr>
 			<tr>
@@ -75,17 +67,17 @@
 			</tr>
 			<tr>
 				<th>Phone No:</th>
-				<td><input type="text" name="phoneNo" size="15"
+				<td><input type="text" name="phoneNo" required size="15"
 					value="<c:out value='${patient.phoneNo}' />" /></td>
 			</tr>
 			<tr>
 				<th>Gender:</th>
-				<td><input type="text" name="gender" size="15"
+				<td><input type="text" name="gender" required size="15"
 					value="<c:out value='${patient.gender}' />" /></td>
 			</tr>
 			<tr>
 				<th>Dob:</th>
-				<td><input type="date" name="dob" size="15"
+				<td><input type="date" name="dob" required size="15"
 					value="<c:out value='${patient.dob}' />" /></td>
 			</tr>
 			<tr>
