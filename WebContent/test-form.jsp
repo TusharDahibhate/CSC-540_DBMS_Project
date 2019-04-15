@@ -3,20 +3,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Wolf Hospital</title>
+<title>TEST MANAGEMENT</title>
 <meta charset="ISO-8859-1">
-    <title>Tests</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+<title>Tests</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
-		<h1>Test Management</h1>
-		<h2>
-				Add New Test &nbsp;&nbsp;&nbsp; <a href="/tests">List
-				All Tests</a>
+		<h1>Tests Management</h1>
+		<div style="text-align: center">
+			<form action="TestServlet" method="get" enctype="multipart/form-data">
+				<input type="submit" class="button" value="ADD"> <input
+					type="hidden" name="operation" value="add" />
+			</form>
 
-		</h2>
+			<form action="TestServlet" method="get" enctype="multipart/form-data">
+				<input type="submit" class="button" value="LIST"> <input
+					type="hidden" name="operation" value="list" />
+			</form>
+
+		</div>
 	</center>
 	<div align="center">
 		<c:if test="${test != null}">
@@ -29,14 +38,14 @@
 		</c:if>
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>
+				<h3>
 					<c:if test="${test != null}">
                Edit Test
               </c:if>
 					<c:if test="${test == null}">
                Add New Test
               </c:if>
-				</h2>
+				</h3>
 			</caption>
 			<c:if test="${test != null}">
 				<input type="hidden" name="id" value="<c:out value='${test.id}' />" />
@@ -61,22 +70,19 @@
 			</tr>
 			<tr>
 				<th>Staff Id:</th>
-				<td>
-	            	<select name="staff_id">
+				<td><select name="staff_id">
 						<c:forEach var="staff" items="${staffs}">
-								<c:if test="${test.staff_id == staff.id}">
+							<c:if test="${test.staff_id == staff.id}">
 								<option value='${staff.id}' selected>${staff.id}</option>
 							</c:if>
 							<c:if test="${test.staff_id != staff.id}">
 								<option value='${staff.id}'>${staff.id}</option>
 							</c:if>
 						</c:forEach>
-					</select>	            	
-	            </td>
+				</select></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Save" /></td>
+				<td colspan="2" align="center"><button type="submit" value="Save" class="button">Submit</button></td>
 			</tr>
 		</table>
 		</form>

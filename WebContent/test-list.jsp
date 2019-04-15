@@ -5,21 +5,23 @@
 <head>
 <title>TEST MANAGEMENT</title>
 <meta charset="ISO-8859-1">
-    <title>Tests</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+<title>Tests</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
 		<h1>Tests Management</h1>
-		<div style="text-align:center">
+		<div style="text-align: center">
 			<form action="TestServlet" method="get" enctype="multipart/form-data">
-				<input type="submit" class="button" value="ADD">
-             <input type="hidden" name="operation" value="add" />
+				<input type="submit" class="button" value="ADD"> <input
+					type="hidden" name="operation" value="add" />
 			</form>
 
 			<form action="TestServlet" method="get" enctype="multipart/form-data">
-				<button type="submit" name="button" value="list">LIST</button>
+				<input type="submit" class="button" value="LIST">
 				<input type="hidden" name="operation" value="list" />
 			</form>
 
@@ -46,7 +48,7 @@
 					<td>
 						<form action="TestServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<button type="submit" name="button" value="EDIT"><a>EDIT</a></button>
 							<input type="hidden" name="operation" value="update" /> <input
 								type="hidden" name="id" value='${test.id}' />
 						</form>
@@ -54,7 +56,7 @@
 					<td>
 						<form action="TestServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<button type="submit" name="button" value="DELETE"><a>DELETE</a></button>
 							<input type="hidden" name="operation" value="delete" /> <input
 								type="hidden" name="id" value='${test.id}' />
 						</form>
