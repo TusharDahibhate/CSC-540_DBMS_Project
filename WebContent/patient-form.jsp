@@ -4,25 +4,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Patient Form</title>
+<title>Patient Management</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
-	<center>
-		<h1>Patient Management</h1>
-		<h2>
-			Add New patient &nbsp;&nbsp;&nbsp; <a href="/patients">List
-				All Patients</a>
+	<div style="text-align: center">
+		<h2>Patient Management</h2>
+		<form action="PatientServlet" method="get"
+			enctype="multipart/form-data">
+			<input type="submit" class="button" value="LIST"> <input
+				type="hidden" name="operation" value="list" />
+		</form>
+	</div>
 
-		</h2>
-	</center>
+
 	<div align="center">
 		<c:if test="${patient != null}">
 			<form action="PatientServlet" method="get">
-			<input type="hidden" name="operation" value="modify" />
+				<input type="hidden" name="operation" value="modify" />
 		</c:if>
 		<c:if test="${patient == null}">
 			<form action="PatientServlet" method="get">
-			<input type="hidden" name="operation" value="create" />
+				<input type="hidden" name="operation" value="create" />
 		</c:if>
 		<table border="1" cellpadding="5">
 			<caption>
@@ -36,14 +42,15 @@
 				</h2>
 			</caption>
 			<c:if test="${patient != null}">
-				<input type="hidden" name="id" value="<c:out value='${patient.id}' />" />
+				<input type="hidden" name="id"
+					value="<c:out value='${patient.id}' />" />
 			</c:if>
 
 			<c:if test="${patient == null}">
 				<tr>
-					<th> Patient id</th>
+					<th>Patient id</th>
 					<td><input type="number" name="id" size="45"
-					value="<c:out value='${patient.id}' />" /></td>
+						value="<c:out value='${patient.id}' />" /></td>
 				</tr>
 			</c:if>
 
@@ -83,8 +90,8 @@
 					value="<c:out value='${patient.address}' />" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Save" /></td>
+				<td colspan="2" align="center"><button type="submit"
+						value="Save" class="button">Submit</button></td>
 			</tr>
 		</table>
 		</form>

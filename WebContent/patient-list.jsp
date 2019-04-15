@@ -5,28 +5,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Patient Management</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
-	<center>
-		<h1>Patient Management</h1>
-		<h2>
-			<form action="patient-form.jsp" method="get"
-				enctype="multipart/form-data">
-				<button type="submit" name="button" value="create">ADD</button>
-			</form>
+	<div style="text-align: center">
+		<h2>Patient Management</h2>
+		<form action="patient-form.jsp" method="get"
+			enctype="multipart/form-data">
+			<input type="submit" class="button" value="ADD">			
+		</form>
 
-			<form action="PatientServlet" method="get"
-				enctype="multipart/form-data">
-				<button type="submit" name="button" value="list">LIST</button>
-				<input type="hidden" name="operation" value="list" />
-			</form>
-		</h2>
-	</center>
+		<form action="PatientServlet" method="get"
+			enctype="multipart/form-data">			
+			<input type="submit" class="button" value="LIST">
+			<input type="hidden" name="operation" value="list" />
+		</form>
+	</div>
 
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>List of Patients</h2>
+				<h3>List of Patients</h3>
 			</caption>
 			<tr>
 				<th>ID</th>
@@ -37,6 +39,11 @@
 				<th>Gender</th>
 				<th>Phone No</th>
 				<th>Address</th>
+				<th>Edit Patient</th>
+				<th>Delete Patient</th>
+				<th>Medical History</th>
+				<th>Starting Range</th>
+				<th>Ending Range</th>
 			</tr>
 			<c:forEach var="pat" items="${patients}">
 				<tr>
@@ -51,7 +58,7 @@
 					<td>
 						<form action="PatientServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<button type="submit" name="button" value="EDIT"><a>EDIT</a></button>
 							<input type="hidden" name="operation" value="update" /> <input
 								type="hidden" name="id" value='${pat.id}' />
 						</form>
@@ -59,21 +66,21 @@
 					<td>
 						<form action="PatientServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<button type="submit" name="button" value="DELETE"><a>DELETE</a></button>
 							<input type="hidden" name="operation" value="delete" /> <input
 								type="hidden" name="id" value='${pat.id}' />
 						</form>
 					</td>
 					<form action="PatientServlet" method="get"
 						enctype="multipart/form-data">
-					<td>
-						<button type="submit" name="button" value="MEDICAL_HISTORY">MEDICAL
-							HISTORY</button> <input type="hidden" name="operation"
-						value="medical_history" /> <input type="hidden" name="id"
-						value='${pat.id}' />
-					</td>
-					<td><input type="date" name="start" /></td>
-					<td><input type="date" name="end" /></td>
+						<td>
+							<button type="submit" name="button" value="MEDICAL_HISTORY"><a>MEDICAL
+								HISTORY</a></button> <input type="hidden" name="operation"
+							value="medical_history" /> <input type="hidden" name="id"
+							value='${pat.id}' />
+						</td>
+						<td><input type="date" name="start" /></td>
+						<td><input type="date" name="end" /></td>
 					</form>
 				</tr>
 			</c:forEach>
