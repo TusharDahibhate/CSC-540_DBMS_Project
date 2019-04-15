@@ -4,27 +4,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Billing Account List</title>
+<title>Billing Account</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
-	<center>
-		<h1>BIlling Account Management</h1>
-		<h2>
-			<form action="billingaccount-form.jsp" method="get" enctype="multipart/form-data">
-				<button type="submit" name="button" value="create">ADD</button>
-			</form>
+	<div style="text-align: center">
+		<h2>Billing Account Management</h2>
+		<form action="billingaccount-form.jsp" method="get"
+			enctype="multipart/form-data">			
+			<input type="submit" class="button" value="CREATE">
+		</form>
 
-			<form action="BillingAccountServlet" method="get" enctype="multipart/form-data">
-				<button type="submit" name="button" value="list">LIST</button>
-				<input type="hidden" name="operation" value="list" />
-			</form>
-		</h2>
-	</center>
+		<form action="BillingAccountServlet" method="get"
+			enctype="multipart/form-data">			
+			<input type="submit" class="button" value="LIST">
+			<input type="hidden" name="operation" value="list" />
+		</form>
+	</div>
 
 	<div align="center">
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>List of Billing Accounts</h2>
+				<h3>List of Billing Accounts</h3>
 			</caption>
 			<tr>
 				<th>ID</th>
@@ -51,7 +55,7 @@
 					<td>
 						<form action="BillingAccountServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<button type="submit" name="button" value="EDIT"><a>EDIT</a></button>
 							<input type="hidden" name="operation" value="update" /> <input
 								type="hidden" name="id" value='${bac.id}' />
 						</form>
@@ -59,19 +63,20 @@
 					<td>
 						<form action="BillingAccountServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<button type="submit" name="button" value="DELETE"><a>DELETE</a></button>
 							<input type="hidden" name="operation" value="delete" /> <input
 								type="hidden" name="id" value='${bac.id}' />
 						</form>
 					</td>
 					<td>
-                        <form action="BillingAccountServlet" method="get"
-                            enctype="multipart/form-data">
-                            <button type="submit" name="button" value="submit">Test Transaction</button>
-                            <input type="hidden" name="operation" value="testTransaction" /> <input
-                                type="hidden" name="id" value='${bac.id}' />
-                        </form>
-                    </td>
+						<form action="BillingAccountServlet" method="get"
+							enctype="multipart/form-data">
+							<button type="submit" name="button" value="submit"><a>Test
+								Transaction</a></button>
+							<input type="hidden" name="operation" value="testTransaction" />
+							<input type="hidden" name="id" value='${bac.id}' />
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
