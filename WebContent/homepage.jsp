@@ -233,6 +233,7 @@
 			> <a href="TestReportServlet">Test Report Management</a><br/>
 			> <a href="PrescriptionServlet">Prescription Management</a><br/>
 			> <a href="TestServlet">Test Management</a><br/>
+			> <a href="MedicalRecordServlet">Medical Record Management</a><br/>
 		</div>
 	</div>
 	<div id="fetchedContent"></div>

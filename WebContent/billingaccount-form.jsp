@@ -49,14 +49,6 @@
 						value="<c:out value='${billingaccounts.id}' />" />
 				</c:if>
 
-				<c:if test="${billingaccounts == null}">
-					<tr>
-						<th>Billing Account id</th>
-						<td><input type="number" name="id" size="45"
-							value="<c:out value='${billingaccounts.id}' />" /></td>
-					</tr>
-				</c:if>
-
 				<tr>
 					<th>Staff ID:</th>
 					<td><input type="number" name="staff_id" size="45"
