@@ -89,10 +89,15 @@ public class CheckoutServlet extends HttpServlet {
 		List<Report> prescbill = reportDAO.getPrescriptionBill(id);
 		request.setAttribute("prescbill", prescbill);
 		request.setAttribute("testbill", testbill);
-		beddao.unassignBed(id);
-		int pBill = pdao.getBill(id);
+		//int pBill = pdao.getBill(id);
+		int pBill = 0;
+		for(Report p: prescbill) {
+			pBill += p.getPrice() * p.getQuantity();
+			
+		}
 		int tBill = tdao.getBill(id);
 		int bBill = beddao.getBill(id);
+		beddao.unassignBed(id);
 		request.setAttribute("pBill", pBill);
 		request.setAttribute("tBill", tBill);
 		request.setAttribute("bBill", bBill);

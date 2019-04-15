@@ -16,7 +16,7 @@
 		</form>	
 	<div>The assigned bed has be released.</div>
 	<div>Registration fee was "${regFee}" dollars.</div>
-	<div>Prescription bill: "${pBill}" dollars</div>
+	
 	<div>
 		<table border="1" cellpadding="5">
 			<caption>
@@ -47,7 +47,8 @@
 			</c:forEach>
 		</table>
 	</div>
-	<div>Test Report bill: "${tBill} dollars"</div>
+	<div>Prescription bill: "${pBill}" dollars</div>
+	
 	<div>
 		<table border="1" cellpadding="5">
 			<caption>
@@ -73,7 +74,8 @@
 			</c:forEach>
 		</table>
 	</div>
-	<div>Bed bill: "${bBill} dollars"</div>
+	<div>Test Report bill: "${tBill} dollars"</div>
+	
 	<div>
 		<table border="1" cellpadding="5">
 			<caption>
@@ -97,6 +99,7 @@
 			</tr>
 		</table>
 	</div>
+	<div>Bed bill: "${bBill} dollars"</div><br/>
 	<div>Total bill: "${total} dollars"</div>
 	<div>GoodBye !</div>
 

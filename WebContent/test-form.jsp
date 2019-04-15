@@ -55,13 +55,6 @@
 				<input type="hidden" name="id" value="<c:out value='${test.id}' />" />
 			</c:if>
 
-			<c:if test="${test == null}">
-				<tr>
-					<th>Test Id</th>
-					<td><input type="number" name="id" size="45"
-						value="<c:out value='${test.id}' />" /></td>
-				</tr>
-			</c:if>
 			<tr>
 				<th>Name:</th>
 				<td><input type="text" name="name" size="45"

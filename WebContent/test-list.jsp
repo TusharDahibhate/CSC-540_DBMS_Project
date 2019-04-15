@@ -39,8 +39,8 @@
 			</caption>
 			<tr>
 				<th>ID</th>
-				<th>Price</th>
 				<th>Name</th>
+				<th>Price</th>
 				<th>Staff Id</th>
 			</tr>
 			<c:forEach var="test" items="${tests}">

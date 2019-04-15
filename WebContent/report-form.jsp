@@ -58,13 +58,6 @@
 					value="<c:out value='${report.id}' />" />
 			</c:if>
 
-			<c:if test="${report == null}">
-				<tr>
-					<th>Test Id</th>
-					<td><input type="number" name="id" size="15"
-						value="<c:out value='${report.id}' />" /></td>
-				</tr>
-			</c:if>
 			<tr>
 				<th>Check-In Id:</th>
 				<td><select name="checkin_id">
