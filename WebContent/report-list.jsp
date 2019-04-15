@@ -4,10 +4,12 @@
 <html>
 <head>
 <title>TEST REPORT MANAGEMENT</title>
- <meta charset="ISO-8859-1">
-    <title>Test Reports</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Test Reports</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
@@ -15,14 +17,14 @@
 		<h2>
 			<form action="TestReportServlet" method="get"
 				enctype="multipart/form-data">
-				<input type="submit" class="button" value="ADD">
-             <input type="hidden" name="operation" value="add" />
+				<input type="submit" class="button" value="ADD"> <input
+					type="hidden" name="operation" value="add" />
 			</form>
 
 			<form action="TestReportServlet" method="get"
 				enctype="multipart/form-data">
-				<button type="submit" name="button" value="list">LIST</button>
-				<input type="hidden" name="operation" value="list" />
+				<input type="submit" class="button" value="LIST"> <input
+					type="hidden" name="operation" value="list" />
 			</form>
 
 		</h2>
@@ -52,7 +54,7 @@
 					<td>
 						<form action="TestReportServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="EDIT">EDIT</button>
+							<button type="submit" name="button" value="EDIT"><a>EDIT</a></button>
 							<input type="hidden" name="operation" value="update" /> <input
 								type="hidden" name="id" value='${rep.id}' />
 						</form>
@@ -60,7 +62,7 @@
 					<td>
 						<form action="TestReportServlet" method="get"
 							enctype="multipart/form-data">
-							<button type="submit" name="button" value="DELETE">DELETE</button>
+							<button type="submit" name="button" value="DELETE"><a>DELETE</a></button>
 							<input type="hidden" name="operation" value="delete" /> <input
 								type="hidden" name="id" value='${rep.id}' />
 						</form>

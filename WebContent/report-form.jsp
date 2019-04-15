@@ -3,18 +3,29 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Wolf Hospital</title>
+<title>TEST REPORT MANAGEMENT</title>
 <meta charset="ISO-8859-1">
-    <title>Test Reports</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
+<title>Test Reports</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"></script>
 </head>
 <body>
 	<center>
-		<h1>Test Report Management</h1>
+		<h1>Test Reports Management</h1>
 		<h2>
-			Add New Test Report &nbsp;&nbsp;&nbsp; <a href="/TestReportServlet">List
-				All Test Reports</a>
+			<form action="TestReportServlet" method="get"
+				enctype="multipart/form-data">
+				<input type="submit" class="button" value="ADD"> <input
+					type="hidden" name="operation" value="add" />
+			</form>
+
+			<form action="TestReportServlet" method="get"
+				enctype="multipart/form-data">
+				<input type="submit" class="button" value="LIST"> <input
+					type="hidden" name="operation" value="list" />
+			</form>
 
 		</h2>
 	</center>
@@ -29,14 +40,14 @@
 		</c:if>
 		<table border="1" cellpadding="5">
 			<caption>
-				<h2>
+				<h3>
 					<c:if test="${report != null}">
                Edit Test Report
               </c:if>
 					<c:if test="${report == null}">
                Add New Test Report
               </c:if>
-				</h2>
+				</h3>
 			</caption>
 			<c:if test="${report != null}">
 				<input type="hidden" name="id"
@@ -84,8 +95,8 @@
 					value="<c:out value='${report.result}' />" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Save" /></td>
+				<td colspan="2" align="center"><button type="submit"
+						value="Save" class="button">Submit</button></td>
 			</tr>
 		</table>
 		</form>
