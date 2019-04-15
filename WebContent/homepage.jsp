@@ -200,7 +200,7 @@
 </head>
 <body>
 	<div class="header">WolfHospital: For all your late night howls!</div>
-	<div id="welcomeBox">Welcome, Chiki-Rads!</div>
+	<div id="welcomeBox">Welcome, D-Day User!</div>
 	<div id="logout">Logout</div>
 	
 	<div id="titleBox">
@@ -230,6 +230,9 @@
 		</div>
 		<div id="doctor" class="functionalityClass">
 			> <a href="PatientServlet">Patient Management</a><br/>
+			> <a href="TestReportServlet">Test Report Management</a><br/>
+			> <a href="PrescriptionServlet">Prescription Management</a><br/>
+			> <a href="TestServlet">Test Management</a><br/>
 		</div>
 	</div>
 	<div id="fetchedContent"></div>
