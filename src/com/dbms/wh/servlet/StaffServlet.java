@@ -16,9 +16,6 @@ import com.dbms.wh.bean.Patient;
 import com.dbms.wh.bean.Staff;
 import com.dbms.wh.dao.StaffDAO;
 
-/**
- * Servlet implementation class Staff
- */
 @WebServlet("/StaffServlet")
 public class StaffServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
